@@ -10,7 +10,7 @@
     <!-- Navbar -->
     <div class="container mx-auto px-4 py-6">
       <div class="bg-white shadow rounded-lg p-6">
-          <h1 class="text-2xl font-bold mb-4 text-red-600">Welcome, {{ $student->first_name }} {{ $student->last_name }}</h1>
+          <h1 class="text-2xl font-bold mb-4">Welcome, {{ $student->first_name }} {{ $student->last_name }}</h1>
           <p class="text-gray-600">Here are your assignment details:</p>
   
           <div class="mt-6">
