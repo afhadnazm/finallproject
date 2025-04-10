@@ -6,6 +6,7 @@ use App\Models\Teacher;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Student;
+use App\Models\Admin;
 
 
 
@@ -18,13 +19,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        Student::create([
-            'first_name' => 'marwa',
-            'last_name' => 'ameer',
-            'email' => 'marwaameer@gmail.com',
+        Admin::create([
+            'first_name' => 'afhad',
+            'last_name' => 'nazm',
+            'email' => 'afhadnazm@gmail.com',
             'password' => bcrypt('Af7122001'),
-            'stage_id' => '4',
-            'department' => 'ISE',
+            'created_at' => now(),
 
         ]);
     }

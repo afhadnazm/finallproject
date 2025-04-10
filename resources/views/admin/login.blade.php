@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Portal</title>
+    <title>admin Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <div class="container px-6 mx-auto">
     <div class="flex flex-col text-center md:text-left md:flex-row h-screen justify-evenly md:items-center">
         <div class="flex flex-col w-full">
-            <h1 class="text-5xl text-gray-800 font-bold">Teacher Portal</h1>
+            <h1 class="text-5xl text-gray-800 font-bold">admin Portal</h1>
         </div>
         <div class="w-full md:w-full lg:w-9/12 mx-auto md:mx-0">
             <div class="bg-white p-10 flex flex-col w-full shadow-xl rounded-xl">
@@ -19,7 +19,7 @@
                 </h2>
 
                 <!-- Laravel login form -->
-                <form method="POST" action="{{ route('login.teacher') }}" class="w-full">
+                <form method="POST" action="{{ route('login.admin') }}" class="w-full">
                     @csrf
                     <!-- Username or Email -->
                     <div id="input" class="flex flex-col w-full my-5">
@@ -32,7 +32,8 @@
                     <!-- Password -->
                     <div id="input" class="flex flex-col w-full my-5">
                         <label for="password" class="text-gray-500 mb-2">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Please insert your password"
+                        <input type="password" id="password" name="password"
+                            placeholder="Please insert your password"
                             class="appearance-none border-2 border-gray-100 rounded-lg px-4 py-3 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:shadow-lg"
                             required />
                     </div>

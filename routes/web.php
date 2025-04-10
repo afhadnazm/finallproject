@@ -34,6 +34,9 @@ Route::get('/teacher_login', function () {
 Route::get('/student_login', function () {
     return view('student.login');
 })->name('student.login');
+Route::get('/admin_login', function () {
+    return view('admin.login');
+})->name('admin.login');
 
 route::prefix('colleges')->group(function () {
     Route::view('/colleges/dentistry', 'colleges.college of dentistry')->name('colleges.dentistry');
@@ -71,6 +74,13 @@ Route::prefix('teacher')->group(function () {
     Route::post('/logout', [TeacherDashboardController::class, 'logout'])->name('logout.teacher')->middleware('teacher');
     Route::get('/login', [TeacherDashboardController::class, 'index'])->name('login.from.teacher');
     Route::put('/teacher/update-grade/{student_id}', [TeacherDashboardController::class, 'updateGrade'])->name('teacher.update.grade');
+
+});
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard')->middleware("admin");
+    Route::post('/login/owner', [AdminDashboardController::class, 'login'])->name('login.admin');
+    Route::post('/logout', [AdminDashboardController::class, 'logout'])->name('logout.admin')->middleware('teacher');
+    Route::get('/login', [AdminDashboardController::class, 'index'])->name('login.from.admin');
 
 });
 
