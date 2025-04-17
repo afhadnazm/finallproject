@@ -38,4 +38,29 @@ class AdminDashboardController extends Controller
         Auth::guard('Admin')->logout();
         return redirect()->route('login.from.admin');
     }
+    public function pending()
+{
+    $students = Student::where('status', 'pending')->get();
+    return view('admin.students.pending', compact('students'));
+}
+
+public function approve(Student $student)
+{
+    $student->update(['status' => 'approved']);
+    $student->notify(new RegistrationApproved());
+    return back()->with('success', 'Student approved!');
+}
+
+public function reject(Request $request, Student $student)
+{
+    $request->validate(['rejection_reason' => 'required|string']);
+    
+    $student->update([
+        'status' => 'rejected',
+        'rejection_reason' => $request->rejection_reason
+    ]);
+    
+    $student->notify(new RegistrationRejected($request->rejection_reason));
+    return back()->with('success', 'Student rejected.');
+}
 }
