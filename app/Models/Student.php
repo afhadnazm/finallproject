@@ -19,6 +19,11 @@ class Student extends Authenticatable
         'email',
         'password',
         'department',
+        'stage_id',
+        'status',
+        'student_id_path',
+        'enrollment_proof_path',
+        'rejection_reason'
     ];
     // Hide sensitive attributes from serialization
     protected $hidden = [

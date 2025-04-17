@@ -34,6 +34,9 @@ Route::get('/teacher_login', function () {
 Route::get('/student_login', function () {
     return view('student.login');
 })->name('student.login');
+Route::get('/student_register', function () {
+    return view('student.registar');
+})->name('student.registar');
 Route::get('/admin_login', function () {
     return view('admin.login');
 })->name('admin.login');
