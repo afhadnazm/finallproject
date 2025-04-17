@@ -13,7 +13,7 @@
     <!-- Header Section -->
     <section class="bg-gray-50 py-10">
         <div class="container mx-auto text-center">
-            <h1 class="text-5xl font-bold text-gray-800">College of Medicine</h1>
+            <h1 class="text-5xl font-bold text-gray-800">College of Medicinnne</h1>
             <p class="text-orange-500 mt-3 text-lg">Home > Colleges > College of Medicine</p>
         </div>
     </section>
