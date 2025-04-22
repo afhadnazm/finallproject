@@ -52,6 +52,10 @@ return [
             'driver' => 'session',
             'provider' => 'teachers',
         ],
+        'pending_student' => [
+            'driver' => 'session',
+            'provider' => 'pending_students',
+        ],
 
 
     ],
@@ -90,6 +94,10 @@ return [
         'teachers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Teacher::class,
+        ],
+        'pendingst_students' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\pending_student::class,
         ],
     ],
 

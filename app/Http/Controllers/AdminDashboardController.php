@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Student;
+
 class AdminDashboardController extends Controller
 {
     public function index()
@@ -39,28 +41,24 @@ class AdminDashboardController extends Controller
         return redirect()->route('login.from.admin');
     }
     public function pending()
-{
-    $students = Student::where('status', 'pending')->get();
-    return view('admin.students.pending', compact('students'));
-}
+    {
+        $students = Student::where('status', 'pending')->get();
+        return view('admin.students.pending', compact('students'));
+    }
 
-public function approve(Student $student)
-{
-    $student->update(['status' => 'approved']);
-    $student->notify(new RegistrationApproved());
-    return back()->with('success', 'Student approved!');
-}
+    public function approve(Student $student)
+    {
+        $student->update(['status' => 'approved']);
+        return back()->with('success', 'Student approved.');
+    }
 
-public function reject(Request $request, Student $student)
-{
-    $request->validate(['rejection_reason' => 'required|string']);
-    
-    $student->update([
-        'status' => 'rejected',
-        'rejection_reason' => $request->rejection_reason
-    ]);
-    
-    $student->notify(new RegistrationRejected($request->rejection_reason));
-    return back()->with('success', 'Student rejected.');
-}
+    public function reject(Request $request, Student $student)
+    {
+        $request->validate(['reason' => 'required|string']);
+        $student->update([
+            'status' => 'rejected',
+            'rejection_reason' => $request->reason
+        ]);
+        return back()->with('error', 'Student rejected.');
+    }
 }

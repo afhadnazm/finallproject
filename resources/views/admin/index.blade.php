@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -19,8 +21,7 @@
                 </div>
                 <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
                     <nav class="flex-1 space-y-2">
-                        <a href="#" id="dashboard-menu"
-                            class="flex items-center px-4 py-2 text-gray-100 bg-gray-700 rounded-lg">
+                        <a href="#" id="dashboard-menu" class="flex items-center px-4 py-2 text-gray-100 rounded-lg">
                             <i class="fas fa-tachometer-alt mr-3"></i>
                             Dashboard
                         </a>
@@ -239,10 +240,7 @@
                 <div id="students-view" class="hidden">
                     <div class="flex items-center justify-between mb-6">
                         <h2 class="text-lg font-semibold text-gray-800">Student Management</h2>
-                        <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
-                            id="back-to-dashboard">
-                            <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
-                        </button>
+
                     </div>
 
                     <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -413,20 +411,13 @@
             const mobileMenuClose = document.getElementById('mobile-menu-close');
             const mobileSidebar = document.getElementById('mobile-sidebar');
             const backdrop = document.getElementById('mobile-sidebar-backdrop');
-            const dashboardMenu = document.getElementById('dashboard-menu');
 
-            mobileStudentsMenu.addEventListener('click', (e) => {
-                e.preventDefault();
-                dashboardView.classList.add('hidden');
-                studentsView.classList.remove('hidden');
-
-                // Update active state
-                document.querySelector('#mobile-sidebar a.bg-gray-700').classList.remove('bg-gray-700', 'text-gray-100');
-                mobileStudentsMenu.classList.add('bg-gray-700', 'text-gray-100');
+            mobileMenuButton.addEventListener('click', function () {
+                mobileSidebar.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
             });
 
             function closeMenu() {
-
                 mobileSidebar.classList.add('hidden');
                 document.body.style.overflow = '';
             }
@@ -441,19 +432,30 @@
             // View switching functionality
             const studentsMenu = document.getElementById('students-menu');
             const mobileStudentsMenu = document.getElementById('mobile-students-menu');
-            const backButton = document.getElementById('back-to-dashboard');
+            const dashboardMenu = document.getElementById('dashboard-menu');
             const dashboardView = document.getElementById('dashboard-view');
             const studentsView = document.getElementById('students-view');
 
             function showStudentsView() {
                 dashboardView.classList.add('hidden');
                 studentsView.classList.remove('hidden');
+
+                // Highlight Students
+                studentsMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                // Remove highlight from Dashboard
+                dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
             }
 
             function showDashboardView() {
                 dashboardView.classList.remove('hidden');
                 studentsView.classList.add('hidden');
+
+                // Highlight Dashboard
+                dashboardMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                // Remove highlight from Students
+                studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
             }
+
 
             studentsMenu.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -466,7 +468,7 @@
                 closeMenu();
             });
 
-            backButton.addEventListener('click', function (e) {
+            dashboardMenu.addEventListener('click', function (e) {
                 e.preventDefault();
                 showDashboardView();
             });

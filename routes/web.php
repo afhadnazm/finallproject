@@ -70,6 +70,7 @@ Route::prefix('student')->group(function () {
     Route::post('/login/owner', [StudentDashboardController::class, 'login'])->name('login.student');
     Route::post('/logout', [StudentDashboardController::class, 'logout'])->name('logout.student')->middleware('student');
     Route::get('/login', [StudentDashboardController::class, 'index'])->name('login.from.student');
+    Route::post('/register', [StudentDashboardController::class, 'register'])->name('register.student');
 });
 Route::prefix('teacher')->group(function () {
     Route::get('/dashboard', [TeacherDashboardController::class, 'dashboard'])->name('teacher.dashboard')->middleware("teacher");
@@ -84,6 +85,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/login/owner', [AdminDashboardController::class, 'login'])->name('login.admin');
     Route::post('/logout', [AdminDashboardController::class, 'logout'])->name('logout.admin')->middleware('teacher');
     Route::get('/login', [AdminDashboardController::class, 'index'])->name('login.from.admin');
+    Route::get('/admin/students/pending', [AdminDashboardController::class, 'pending'])->name('admin.students.pending');
+    Route::post('/admin/students/{student}/approve', [AdminDashboardController::class, 'approve'])->name('admin.students.approve');
+    Route::post('/admin/students/{student}/reject', [AdminDashboardController::class, 'reject'])->name('admin.students.reject');
 
 });
 
