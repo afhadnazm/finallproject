@@ -23,6 +23,7 @@ class pending_student extends Authenticatable
         'student_id_path',
         'enrollment_proof_path',
         'verification_notes',
+        'status'
 
     ];
     // Hide sensitive attributes from serialization
@@ -35,6 +36,7 @@ class pending_student extends Authenticatable
         'created_at',
         'updated_at',
     ];
+
 
 
 

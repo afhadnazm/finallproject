@@ -12,15 +12,16 @@ return new class extends Migration {
      */
     public function up()
     {
-        // Create migration
+        // database/migrations/[new_timestamp]_create_pending_students_table.php
         Schema::create('pending_students', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->foreignId('stage_id')->constrained('stages')->cascadeOnDelete();
+            $table->integer('stage_id');
             $table->string('department')->nullable();
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->string('student_id_path');
             $table->string('enrollment_proof_path');
             $table->text('verification_notes')->nullable();

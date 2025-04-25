@@ -32,15 +32,15 @@
                     <!-- Password -->
                     <div id="input" class="flex flex-col w-full my-5">
                         <label for="password" class="text-gray-500 mb-2">Password</label>
-                        <input type="password" id="password" name="password"
-                            placeholder="Please insert your password"
+                        <input type="password" id="password" name="password" placeholder="Please insert your password"
                             class="appearance-none border-2 border-gray-100 rounded-lg px-4 py-3 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:shadow-lg"
                             required />
                     </div>
 
                     <!-- Submit Button -->
                     <div id="button" class="flex flex-col w-full my-5">
-                        <button type="submit" class="text-white bg-gradient-to-r from-red-500 via-red-500 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg  px-10 py-2 text-center me-2 mb-0 text-xl">
+                        <button type="submit"
+                            class="text-white bg-gradient-to-r from-red-500 via-red-500 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg  px-10 py-2 text-center me-2 mb-0 text-xl">
                             <div class="flex flex-row items-center justify-center">
                                 <div class="mr-2">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"

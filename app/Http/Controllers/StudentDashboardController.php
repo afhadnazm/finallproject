@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\pending_student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\pending_students;
+use App\Models\Subject;
+use App\Models\Grade;
 use Illuminate\Support\Facades\Hash;
 
 class StudentDashboardController extends Controller
@@ -17,13 +18,33 @@ class StudentDashboardController extends Controller
     public function dashboard()
     {
         $student = Auth::guard('student')->user();
+        ;
 
-        // Load the students related to the teacher
-        $student->load(['teacherAssignments', 'stage']);
-
-        // Pass teacher data to the view
-        return view('student.index  ', compact('student'));
+        $registeredSubjects = $student->subjects()->with('teacher')->get();
+        $availableSubjects = Subject::whereNotIn('id', $registeredSubjects->pluck('id'))->get();
+        $grades = Grade::where('student_id', auth('student')->id())
+            ->with(['subject', 'semester'])
+            ->get();
+        return view('student.index', compact('student', 'registeredSubjects', 'availableSubjects', 'grades'));
     }
+    public function subject_register(Request $request)
+    {
+        $request->validate([
+            'subject_id' => 'required|exists:subjects,id',
+        ]);
+
+        $student = auth()->user(); // Authenticated student
+        $subjectId = $request->subject_id;
+
+        // Check if already registered
+        if (!$student->subjects()->where('subject_id', $subjectId)->exists()) {
+            $student->subjects()->attach($subjectId);
+            return back()->with('success', 'Registered successfully!');
+        }
+
+        return back()->with('info', 'You have already registered for this subject.');
+    }
+
     public function login(Request $request)
     {
         $request->validate([
@@ -59,8 +80,9 @@ class StudentDashboardController extends Controller
         ]);
 
         // Handle file uploads
-        $studentIdPath = $request->file('student_id')->store('pending/student_ids');
-        $enrollmentProofPath = $request->file('enrollment_proof')->store('pending/enrollment_proofs');
+        $studentIdPath = $request->file('student_id')->store('pending/student_ids', 'public');
+
+        $enrollmentProofPath = $request->file('enrollment_proof')->store('pending/enrollment_proofs', 'public');
 
         // Store in pending table
         $pendingStudent = pending_student::create([
@@ -79,6 +101,23 @@ class StudentDashboardController extends Controller
         // You'll need to implement this notification
         // Notification::send($adminUsers, new PendingStudentNotification($pendingStudent));
 
-        return redirect()->route('student.registration.success');
+        return redirect()->route('login.from.student');
+    }
+    public function download(pending_student $document)
+    {
+        if (!Storage::exists($document->file_path)) {
+            abort(404, 'File not found');
+        }
+
+        $extension = pathinfo($document->file_path, PATHINFO_EXTENSION);
+        $filename = "{$document->student->name}_{$document->document_type}.{$extension}";
+
+        return Storage::download($document->file_path, $filename);
+    }
+
+    public function show(Student $student)
+    {
+        $documents = $student->documents;
+        return view('admin.students.documents', compact('student', 'documents'));
     }
 }

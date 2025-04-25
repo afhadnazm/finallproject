@@ -42,6 +42,7 @@ class Teacher extends Authenticatable
     {
         return $this->belongsTo(Stage::class);
     }
+
 }
 
 
