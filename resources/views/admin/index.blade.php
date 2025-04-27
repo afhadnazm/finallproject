@@ -39,10 +39,10 @@
                             <span
                                 class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full">23</span>
                         </a>
-                        <a href="#"
+                        <a href="#" id="subjects-menu"
                             class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
                             <i class="fas fa-cog mr-3"></i>
-                            Settings
+                            subject
                         </a>
                         <a href="#"
                             class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
@@ -89,7 +89,7 @@
             </header>
 
             <!-- Main Content Area -->
-            <main class="flex-1 overflow-y-auto p-4 bg-gray-50">
+            <class="flex-1 overflow-y-auto p-4 bg-gray-50">
                 <!-- Dashboard View -->
                 <div id="dashboard-view">
                     <!-- Stats Cards -->
@@ -588,10 +588,80 @@
 
                     </form>
                 </div>
-
-
-
         </div>
+        <!-- End of Students View -->
+
+
+
+
+
+        <div id="subjects-view" class="w-full bg-white rounded-xl shadow-lg overflow-hidden p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold text-gray-800">Subjects</h1>
+                <a href="{{ route('admin.subjects.store') }}"
+                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Create New Subject
+                </a>
+            </div>
+
+            @if(session('success'))
+                <div class="mb-4 p-4 bg-green-100 border border-green-200 text-green-700 rounded">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Name
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Stage
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Semester</th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Teacher</th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach($subjects as $subject)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        {{ $subject->name }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{ $subject->stage->name }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{ $subject->semester->name }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{ $subject->teacher->name }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
+                                        <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Mobile sidebar overlay -->
         <div class="fixed inset-0 z-40 hidden" id="mobile-sidebar">
             <div class="fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity" id="mobile-sidebar-backdrop"></div>
@@ -692,18 +762,21 @@
                 const teachersView = document.getElementById('teachers-view');
                 const signupView = document.getElementById('signup_view');
                 const teacherSignup = document.getElementById('teacher_signup');
+                const subjectsView = document.getElementById('subjects-view');
+                const subjectsMenu = document.getElementById('subjects-menu');
 
                 function showStudentsView() {
                     dashboardView.classList.add('hidden');
                     teachersView.classList.add('hidden');
                     signupView.classList.add('hidden');
                     studentsView.classList.remove('hidden');
+                    subjectsView.classList.add('hidden');
 
-                    // Highlight Students
+
                     studentsMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    // Remove highlight from Dashboard
                     dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
                     teachersMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                    subjectsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
                 }
 
                 function showDashboardView() {
@@ -711,12 +784,14 @@
                     studentsView.classList.add('hidden');
                     teachersView.classList.add('hidden');
                     signupView.classList.add('hidden');
+                    subjectsView.classList.add('hidden');
 
                     // Highlight Dashboard
                     dashboardMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
                     // Remove highlight from Students
                     studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
                     teachersMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                    subjectsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
                 }
 
                 function showTeachersView() {
@@ -724,24 +799,42 @@
                     studentsView.classList.add('hidden');
                     teachersView.classList.remove('hidden');
                     signupView.classList.add('hidden');
+                    subjectsView.classList.add('hidden');
 
                     // Update active states
                     dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
                     // Remove highlight from Students
                     studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
                     teachersMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                    subjectsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
                 }
                 function showTeacherssignup() {
                     dashboardView.classList.add('hidden');
                     studentsView.classList.add('hidden');
                     teachersView.classList.remove('hidden');
                     signupView.classList.remove('hidden');
+                    subjectsView.classList.add('hidden');
 
                     // Update active states
                     dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
                     // Remove highlight from Students
                     studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
                     teachersMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                    subjectsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                }
+                function showsubject() {
+                    dashboardView.classList.add('hidden');
+                    studentsView.classList.add('hidden');
+                    teachersView.classList.add('hidden');
+                    signupView.classList.add('hidden');
+                    subjectsView.classList.remove('hidden');
+
+                    // Update active states
+                    dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                    // Remove highlight from Students
+                    studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                    teachersMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                    subjectsMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
                 }
                 showDashboardView();
 
@@ -769,6 +862,10 @@
                 teacherSignup.addEventListener('click', function (e) {
                     e.preventDefault();
                     showTeacherssignup();
+                });
+                subjectsMenu.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    showsubject();
                 });
 
                 // Missing event listener for mobileTeachersMenu

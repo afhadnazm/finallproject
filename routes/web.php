@@ -128,7 +128,7 @@ Route::prefix('admin')->group(function () {
         ->name('admin.students.documents.download');
     Route::get('/{student}/documents', [StudentDashboardController::class, 'show'])
         ->name('admin.students.documents.show');
-
+    Route::post('/subjects', [StudentDashboardController::class, 'store_subject'])->name('admin.subjects.store');
 });
 
 

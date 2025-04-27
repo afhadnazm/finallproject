@@ -28,9 +28,10 @@ class stage extends Authenticatable
     ];
     protected $guarded = [];
 
-    public function semesters(): HasMany
+
+    public function subjects()
     {
-        return $this->hasMany(Semester::class);
+        return $this->hasMany(Subject::class);
     }
 
 }

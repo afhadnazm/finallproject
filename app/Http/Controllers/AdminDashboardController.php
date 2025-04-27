@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\hash;
 use App\Models\Student;
 use App\Models\pending_student;
 use App\Models\Teacher;
-use illuminate\Support\Facades\Log;
+use App\Models\Stage;
+use App\Models\Semester;
+use App\Models\Subject;
 class AdminDashboardController extends Controller
 {
     public function index()
@@ -22,7 +24,10 @@ class AdminDashboardController extends Controller
         $pendingStudents = pending_student::where('status', 'pending')->get();
         $totalStudents = Student::count();
         $totalpensdinStudents = pending_student::count();
-        return view('admin.index', compact('pendingStudents', 'totalStudents', 'admin', 'totalpensdinStudents', 'teachers'));
+        $stages = Stage::all();
+        $semesters = Semester::all();
+        $subjects = Subject::all();
+        return view('admin.index', compact('pendingStudents', 'totalStudents', 'admin', 'totalpensdinStudents', 'teachers', 'stages', 'semesters', 'subjects'));
 
 
     }
@@ -116,6 +121,21 @@ class AdminDashboardController extends Controller
         // You'll need to implement this notification
         // Notification::send($adminUsers, new PendingStudentNotification($pendingStudent));
 
-        return redirect()->route('login.from.student');
+        return back()->with('succes', 'teacher create succesfuly.');
+    }
+
+
+    public function store_subject(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'stage_id' => 'required|exists:stages,id',
+            'semester_id' => 'required|exists:semesters,id',
+            'teacher_id' => 'required|exists:teachers,id',
+        ]);
+
+        Subject::create($validated);
+
+        return back()->with('success', 'Subject created successfully!');
     }
 }
