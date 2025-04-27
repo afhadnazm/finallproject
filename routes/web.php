@@ -101,6 +101,9 @@ Route::prefix('student')->group(function () {
     Route::post('/login/owner', [StudentDashboardController::class, 'login'])->name('login.student');
     Route::post('/logout', [StudentDashboardController::class, 'logout'])->name('logout.student')->middleware('student');
     Route::get('/login', [StudentDashboardController::class, 'index'])->name('login.from.student');
+    Route::post('/register', [StudentDashboardController::class, 'register'])->name('register.student');
+    Route::post('/student/register-subject', [StudentDashboardController::class, 'register'])->name('student.register.subject');
+
 });
 Route::prefix('teacher')->group(function () {
     Route::get('/dashboard', [TeacherDashboardController::class, 'dashboard'])->name('teacher.dashboard')->middleware("teacher");
@@ -109,12 +112,22 @@ Route::prefix('teacher')->group(function () {
     Route::get('/login', [TeacherDashboardController::class, 'index'])->name('login.from.teacher');
     Route::put('/teacher/update-grade/{student_id}', [TeacherDashboardController::class, 'updateGrade'])->name('teacher.update.grade');
 
+
+
 });
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin.dashboard')->middleware("admin");
     Route::post('/login/owner', [AdminDashboardController::class, 'login'])->name('login.admin');
     Route::post('/logout', [AdminDashboardController::class, 'logout'])->name('logout.admin')->middleware('teacher');
     Route::get('/login', [AdminDashboardController::class, 'index'])->name('login.from.admin');
+    Route::get('/admin/students/pending', [AdminDashboardController::class, 'showPendingStudents'])->name('admin.students.pending');
+    Route::post('/admin/students/{pending_student}/approve', [AdminDashboardController::class, 'approve'])->name('admin.students.approve');
+    Route::post('/admin/students/{student}/reject', [AdminDashboardController::class, 'reject'])->name('admin.students.reject');
+    Route::post('/teacher/register-subject', [AdminDashboardController::class, 'register'])->name('teacher.register.subject');
+    Route::get('/documents/{document}/download', [StudentDashboardController::class, 'download'])
+        ->name('admin.students.documents.download');
+    Route::get('/{student}/documents', [StudentDashboardController::class, 'show'])
+        ->name('admin.students.documents.show');
 
 });
 

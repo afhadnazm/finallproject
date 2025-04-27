@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class stage extends Authenticatable
 {
@@ -25,6 +26,12 @@ class stage extends Authenticatable
         'created_at',
         'updated_at',
     ];
+    protected $guarded = [];
+
+    public function semesters(): HasMany
+    {
+        return $this->hasMany(Semester::class);
+    }
 
 }
 

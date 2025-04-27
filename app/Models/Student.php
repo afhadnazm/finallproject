@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Illuminate\Support\Facades\Storage;
 class Student extends Authenticatable
 {
     // Define the table name (optional if Laravel's naming convention is followed)
@@ -18,12 +18,12 @@ class Student extends Authenticatable
         'last_name',
         'email',
         'password',
-        'department',
         'stage_id',
-        'status',
+        'department',
         'student_id_path',
         'enrollment_proof_path',
-        'rejection_reason'
+        'verification_notes',
+        'status'
     ];
     // Hide sensitive attributes from serialization
     protected $hidden = [
@@ -35,17 +35,16 @@ class Student extends Authenticatable
         'created_at',
         'updated_at',
     ];
-    public function teacherAssignments()
+    public function subjects()
     {
-        return $this->belongsToMany(Student::class, 'teacher_assignments')
-            ->using(TeacherAssignment::class)
-            ->withPivot('teacher_id', 'student_id', 'assignment_title', 'midterm', 'quiz', 'homework', 'activity', 'final', 'total')  // Include new fields here
-            ->withTimestamps();
+        return $this->belongsToMany(Subject::class, 'subject_student');
     }
-    public function stage()
+
+    public function grades()
     {
-        return $this->belongsTo(Stage::class);
+        return $this->hasMany(Grade::class);
     }
+
 
 
 }

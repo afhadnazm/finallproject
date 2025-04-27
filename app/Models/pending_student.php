@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Teacher extends Authenticatable
+class pending_student extends Authenticatable
 {
     // Define the table name (optional if Laravel's naming convention is followed)
-    protected $table = 'teachers';
+    protected $table = 'pending_students';
 
     // Specify the primary key (optional if it's 'id')
     protected $primaryKey = 'id';
@@ -18,8 +18,13 @@ class Teacher extends Authenticatable
         'last_name',
         'email',
         'password',
-        'subject_title',
+        'stage_id_path',
         'department',
+        'student_id_path',
+        'enrollment_proof_path',
+        'verification_notes',
+        'status'
+
     ];
     // Hide sensitive attributes from serialization
     protected $hidden = [
@@ -31,17 +36,9 @@ class Teacher extends Authenticatable
         'created_at',
         'updated_at',
     ];
-    public function students()
-    {
-        return $this->belongsToMany(Student::class, 'teacher_assignments')
-            ->using(TeacherAssignment::class)
-            ->withPivot('teacher_id', 'student_id', 'assignment_title', 'midterm', 'quiz', 'homework', 'activity', 'final', 'total')  // Include new fields here
-            ->withTimestamps();
-    }
-    public function stage()
-    {
-        return $this->belongsTo(Stage::class);
-    }
+
+
+
 
 }
 

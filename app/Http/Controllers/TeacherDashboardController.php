@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use App\Models\Grade;
 
 class TeacherDashboardController extends Controller
 {
@@ -14,15 +14,11 @@ class TeacherDashboardController extends Controller
     }
     public function dashboard()
     {
-        // Get the logged-in teacher
-        $teacher = Auth::guard('teacher')->user();
-
-        // Load the students related to the teacher
-        $teacher->load(['students', 'stage']);
-
-        // Pass teacher data to the view
-        return view('teacher.index  ', compact('teacher'));
+        $teacher = auth()->user();
+        $subjects = $teacher->subjects()->with('students')->get();
+        return view('teacher.dashboard', compact('subjects'));
     }
+
     public function login(Request $request)
     {
         $request->validate([
@@ -43,35 +39,30 @@ class TeacherDashboardController extends Controller
         Auth::guard('teacher')->logout();
         return redirect()->route('login.from.teacher');
     }
-    public function updateGrade(Request $request, $student_id)
+    public function store(Request $request)
     {
-        // Validate the grade input
         $request->validate([
-            'midterm' => 'required|numeric|min:0|max:25',
-            'quiz' => 'required|numeric|min:0|max:10',
-            'homework' => 'required|numeric|min:0|max:10',
-            'activity' => 'required|numeric|min:0|max:5',
-            'final' => 'required|numeric|min:0|max:50',
+            'student_id' => 'required|exists:students,id',
+            'subject_id' => 'required|exists:subjects,id',
+            'semester_id' => 'required|exists:semesters,id',
+            'grade' => 'required|numeric|min:0|max:100',
         ]);
 
-        $total = $request->midterm + $request->quiz + $request->homework + $request->activity + $request->final;
+        $teacher = auth('teacher')->user();
 
+        Grade::updateOrCreate(
+            [
+                'student_id' => $request->student_id,
+                'subject_id' => $request->subject_id,
+                'semester_id' => $request->semester_id,
+                'teacher_id' => $teacher->id,
+            ],
+            [
+                'grade' => $request->grade,
+            ]
+        );
 
-        // Get the logged-in teacher
-        $teacher = Auth::guard('teacher')->user();
-
-        // Update the grade in the pivot tablem
-        $teacher->students()->updateExistingPivot($student_id, [
-            'midterm' => $request->midterm,
-            'quiz' => $request->quiz,
-            'homework' => $request->homework,
-            'activity' => $request->activity,
-            'final' => $request->final,
-            'total' => $total,
-
-        ]);
-
-        return redirect()->route('teacher.dashboard')->with('success', 'Grade updated successfully.');
-
+        return back()->with('success', 'Grade saved successfully!');
     }
+
 }
