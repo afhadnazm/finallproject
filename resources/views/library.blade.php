@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Library - Hawler Medical University</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(249, 115, 22, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.8); }
+        }
+        
+        /* Animation Classes */
+        .animate-fadeIn {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .animate-slideInUp {
+            animation: slideInUp 1s ease forwards;
+        }
+        
+        .animate-slideInLeft {
+            animation: slideInLeft 1s ease forwards;
+        }
+        
+        .animate-slideInRight {
+            animation: slideInRight 1s ease forwards;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        .animate-bounce {
+            animation: bounce 4s ease-in-out infinite;
+        }
+        
+        .animate-spin {
+            animation: spin 8s linear infinite;
+        }
+        
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        /* Animation Delays */
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-500 {
+            animation-delay: 0.5s;
+        }
+        
+        /* Hover Effects */
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .hover-glow {
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.7);
+        }
+        
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Custom Styles */
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #f97316, #c2410c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card-3d {
+            transition: transform 0.5s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .card-3d:hover {
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+        
+        /* Navbar dropdown animation */
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 180px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 0.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.2s ease;
+            z-index: 50;
+            border-top: 2px solid #f97316;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        /* Scroll Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 3px;
+            background: transparent;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        
+        .progress-bar {
+            height: 3px;
+            background: linear-gradient(90deg, #f97316, #c2410c);
+            width: 0%;
+        }
+
+        /* Enhanced Navigation */
+        .nav-item {
+            position: relative;
+            padding: 0.5rem 0.75rem;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            color: #f97316;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #f97316;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 80%;
+            left: 10%;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Library specific styles */
+        .library-link {
+            color: #3b82f6;
+            transition: all 0.2s ease;
+        }
+        
+        .library-link:hover {
+            color: #f97316;
+            text-decoration: underline;
+        }
+        
+        .library-section {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .library-section:last-child {
+            border-bottom: none;
+        }
+        
+        .library-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .library-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-5px);
+        }
+        
+        /* Decorative elements */
+        .circle-decoration {
+            position: absolute;
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .animate-bounce-slow {
+            animation: bounce 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100" style="font-family: Cambria, Georgia, serif">
+    <!-- Scroll Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Decorative Elements -->
+    <div class="circle-decoration bg-orange-200 w-64 h-64 top-40 -left-20 animate-float" style="animation-delay: 0s;"></div>
+    <div class="circle-decoration bg-orange-100 w-96 h-96 top-96 -right-40 animate-float" style="animation-delay: 2s;"></div>
+    <div class="circle-decoration bg-orange-50 w-48 h-48 bottom-40 left-1/4 animate-float" style="animation-delay: 1s;"></div>
+
+    <!-- Simplified Navbar -->
+    <nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-10 animate-fadeIn glass-effect">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="{{ asset('storage/images/logo.jpg') }}" alt="Logo" class="h-10 w-10 rounded-md">
+                    <span class="ml-2 text-lg font-semibold text-orange-600">Hawler Medical University</span>
+                </div>
+
+                <!-- Menu Items (Hidden on mobile) -->
+                <div class="hidden md:flex space-x-1">
+                    <!-- Home Dropdown -->
+                    <div class="relative dropdown">
+                        <a href="/" class="nav-item text-gray-700 flex items-center">
+                            HOME
+                            <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="dropdown-content">
+                            <div class="py-2 px-4">
+                                <a href="about.html" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">About us</a>
+                                <a href="contact.html" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Contact us</a>
+                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Vision and Mission</a>
+                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">University Logo</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Other Links -->
+                    <div class="relative dropdown">
+                        <a href="#" class="nav-item text-gray-700 flex items-center">
+                           DIVISIONS
+                            <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="dropdown-content">
+                            <div class="py-2 px-4">
+                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">University Counsil</a>
+                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">President's Office</a>
+                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Vision and Mission</a>
+                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">University Logo</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative dropdown">
+                        <a href="#" class="nav-item text-gray-700 flex items-center">
+                         COLLEGE
+                            <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="dropdown-content">
+                            <div class="py-2 px-4">
+                                <a href="{{ route('colleges.medicine') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Medicine</a>
+                                <a href="{{ route('colleges.dentistry') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Dentistry</a>
+                                <a href="{{ route('colleges.pharmacy') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Pharmacy</a>
+                                <a href="{{ route('colleges.nursing') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Nursing</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative dropdown">
+                        <a href="#" class="nav-item text-gray-700 flex items-center">
+                        FEATURE
+                            <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="dropdown-content">
+                            <div class="py-2 px-4">
+                                <a href="library.html" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Library</a>
+                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Conferences</a>
+                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Relevant Websites</a>
+                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Academic Relations</a>
+                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Academicians Profile</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative dropdown">
+                        <a href="#" class="nav-item text-gray-700 flex items-center">
+                       SERVICE
+                            <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                         <div class="dropdown-content">
+                          
+                        </div> 
+                    </div>
+                   
+                    <a href="" class="nav-item text-gray-700">EVENTS</a>
+                    
+                    <div class="relative dropdown">
+                        <a href="#" class="nav-item text-gray-700 flex items-center">
+                       PORTAL
+                            <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="dropdown-content">
+                            <div class="py-2 px-4">
+                                <a href="/student_login" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Student Portal</a>
+                                <a href="/teacher_login" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Teacher Portal</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center">
+                    <!-- Login Button -->
+                    <button type="button" class="hidden md:block text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-orange-300 font-medium rounded-lg px-4 py-1.5 text-sm">Login</button>
+                    
+                    <!-- Mobile menu button -->
+                    <button id="nav-toggle" class="md:hidden text-orange-600 focus:outline-none p-2 rounded-lg hover:bg-orange-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu (Initially Hidden) -->
+            <div id="nav-content" class="hidden md:hidden py-3 border-t border-gray-200 animate-slideInUp">
+                <!-- Mobile menu content here -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section - Updated to match the example -->
+    <section class="bg-gradient-to-r from-orange-200 via-orange-100 to-orange-200 py-12 shadow animate-fadeIn relative overflow-hidden mt-16">
+        <div class="container mx-auto text-center relative z-10">
+            <h1 class="text-5xl font-extrabold text-gray-800 tracking-tight">University Library</h1>
+            <p class="text-orange-600 mt-4 text-lg">Home / Services / Library</p>
+        </div>
+        <!-- Animated background elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+            <div class="absolute w-20 h-20 bg-orange-300 rounded-full opacity-20 top-1/4 left-1/4 animate-bounce-slow"></div>
+            <div class="absolute w-16 h-16 bg-orange-400 rounded-full opacity-20 top-3/4 left-1/3 animate-bounce-slow" style="animation-delay: 1s;"></div>
+            <div class="absolute w-24 h-24 bg-orange-200 rounded-full opacity-20 top-1/3 right-1/4 animate-bounce-slow" style="animation-delay: 2s;"></div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto pt-12 pb-12 px-4">
+        <!-- Library Content -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8 animate-slideInUp">
+            <h2 class="text-2xl font-bold text-blue-500 mb-6">Digital Library of Hawler Medical University</h2>
+            
+            <div class="space-y-6">
+                <!-- E-Journals Section -->
+                <div class="library-section">
+                    <a href="#" class="text-xl text-blue-500 hover:text-orange-500 transition-colors">e-journals subscription through Hinari</a>
+                    <p class="text-gray-600 mt-1">(Access to more than 21,000 e-journals)</p>
+                </div>
+                
+                <!-- E-Books Section -->
+                <div class="library-section">
+                    <a href="#" class="text-xl text-blue-500 hover:text-orange-500 transition-colors">e-books subscription through Hinari</a>
+                    <p class="text-gray-600 mt-1">(Access to more than 69,000 e-books)</p>
+                </div>
+                
+                <!-- College Libraries -->
+                <div class="space-y-4">
+                    <!-- Medicine -->
+                    <div class="library-section">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Library of the College of Medicine</h3>
+                            <div class="space-x-4">
+                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
+                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dentistry -->
+                    <div class="library-section">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Library of the College of Dentistry</h3>
+                            <div class="space-x-4">
+                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
+                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pharmacy -->
+                    <div class="library-section">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Library of the College of Pharmacy</h3>
+                            <div class="space-x-4">
+                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Book</a>
+                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Nursing -->
+                    <div class="library-section">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Library of the College of Nursing</h3>
+                            <div class="space-x-4">
+                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
+                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Health Sciences -->
+                    <div class="library-section">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Library of the College of Health Sciences</h3>
+                            <div class="space-x-4">
+                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
+                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Medical Research Center -->
+                    <div class="library-section">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-semibold text-gray-800">Library of the Medical Research Center</h3>
+                            <div class="space-x-4">
+                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation and Rating -->
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <a href="#" class="flex items-center text-gray-600 hover:text-orange-500 mb-4 md:mb-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                Prev
+            </a>
+            
+            <div class="flex items-center">
+                <span class="mr-2 text-gray-600">Rating:</span>
+                <div class="flex">
+                    <i class="fas fa-star text-orange-500"></i>
+                    <i class="fas fa-star text-orange-500"></i>
+                    <i class="far fa-star text-gray-400"></i>
+                    <i class="far fa-star text-gray-400"></i>
+                    <i class="far fa-star text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Featured Resources Section -->
+    <section class="bg-gray-50 py-12 reveal">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center gradient-text mb-8">Featured Library Resources</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Resource 1 -->
+                <div class="library-card p-6 animate-fadeIn delay-100">
+                    <div class="bg-orange-100 text-orange-600 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Online Catalog</h3>
+                    <p class="text-gray-600 mb-4">Search our comprehensive catalog of books, journals, and other resources available in our libraries.</p>
+                    <a href="#" class="text-orange-500 hover:text-orange-700 font-medium">Access Catalog →</a>
+                </div>
+                
+                <!-- Resource 2 -->
+                <div class="library-card p-6 animate-fadeIn delay-300">
+                    <div class="bg-orange-100 text-orange-600 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Research Databases</h3>
+                    <p class="text-gray-600 mb-4">Access our collection of specialized medical and scientific research databases.</p>
+                    <a href="#" class="text-orange-500 hover:text-orange-700 font-medium">Explore Databases →</a>
+                </div>
+                
+                <!-- Resource 3 -->
+                <div class="library-card p-6 animate-fadeIn delay-500">
+                    <div class="bg-orange-100 text-orange-600 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Library Services</h3>
+                    <p class="text-gray-600 mb-4">Learn about our services including borrowing, reference assistance, interlibrary loans, and research support.</p>
+                    <a href="#" class="text-orange-500 hover:text-orange-700 font-medium">View Services →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Library Hours and Information -->
+    <section class="py-12 reveal">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold mb-6 gradient-text">Library Hours & Information</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Hours -->
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Opening Hours</h3>
+                        <table class="w-full">
+                            <tbody>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 font-medium">Sunday - Thursday</td>
+                                    <td class="py-2 text-right">8:30 AM - 3:00 PM</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 font-medium">Friday - Saturday</td>
+                                    <td class="py-2 text-right">Closed</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-2 font-medium">Holidays</td>
+                                    <td class="py-2 text-right">Closed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-semibold mb-2">Contact the Library</h4>
+                            <p class="text-gray-600">Email: <a href="mailto:library@hmu.edu.krd" class="text-blue-500 hover:text-orange-500">library@hmu.edu.krd</a></p>
+                            <p class="text-gray-600">Phone: +964 66 227 3384 ext. 1234</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Information -->
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Library Policies</h3>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <svg class="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                                <span>Students must present valid ID cards to borrow materials</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                                <span>Books may be borrowed for up to 14 days</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                                <span>Reference materials and journals cannot be taken out of the library</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                                <span>Late returns are subject to fines</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                                <span>Maintain silence in the reading areas</span>
+                            </li>
+                        </ul>
+                        
+                        <a href="#" class="mt-6 inline-block bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 transition-colors">Download Full Library Guide</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-10 animate-fadeIn">
+        <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
+            <!-- Contact HMU Section -->
+            <div class="animate-slideInUp delay-100">
+                <h3 class="text-lg font-semibold text-white mb-3 gradient-text">Contact HMU</h3>
+                <ul class="space-y-2">
+                    <li class="flex items-center hover-lift">
+                        <span class="mr-2 animate-pulse">✉️</span>
+                        <a href="mailto:info@hmu.edu.krd" class="hover:text-orange-500 transition-colors">info@hmu.edu.krd</a>
+                    </li>
+                    <li class="flex items-center hover-lift">
+                        <span class="mr-2 animate-pulse" style="animation-delay: 0.2s;">🌐</span>
+                        <a href="http://www.hmu.edu.krd" class="hover:text-orange-500 transition-colors">www.hmu.edu.krd</a>
+                    </li>
+                    <li class="hover-lift">Tel: +964 66 227 3384</li>
+                    <li class="hover-lift">Fax: +964 66 227 3382</li>
+                    <li class="flex items-start hover-lift">
+                        <span class="mr-2 animate-float">📍</span>
+                        Iraq, Kurdistan Region,<br />
+                        Erbil, 100M Street, Near Rizgary Teaching Hospital,<br />
+                        P.O. Box 178
+                    </li>
+                </ul>
+            </div>
+        
+            <!-- Opening Hours Section -->
+            <div class="animate-slideInUp delay-300">
+                <h3 class="text-lg font-semibold text-white mb-3 gradient-text">Opening Hours</h3>
+                <p class="hover-lift">Sunday - Thursday: <span class="text-gray-100">08:30 am - 03:00 pm</span></p>
+                <p class="hover-lift">Friday and Saturday: <span class="bg-orange-500 text-white rounded px-2 py-1 animate-pulse">Closed</span></p>
+            </div>
+        
+            <!-- Web Traffic Section -->
+            <div class="animate-slideInUp delay-500">
+                <h3 class="text-lg font-semibold text-white mb-3 gradient-text">Web Traffic</h3>
+                <ul class="space-y-1">
+                    <li class="hover-lift">👤 Today: <span class="text-gray-100 animate-pulse">2265</span></li>
+                    <li class="hover-lift">👤 Yesterday: <span class="text-gray-100 animate-pulse" style="animation-delay: 0.2s;">3898</span></li>
+                    <li class="hover-lift">👤 This Week: <span class="text-gray-100 animate-pulse" style="animation-delay: 0.4s;">12748</span></li>
+                    <li class="hover-lift">👤 This Month: <span class="text-gray-100 animate-pulse" style="animation-delay: 0.6s;">90849</span></li>
+                    <li class="hover-lift">👤 Total: <span class="text-gray-100 animate-pulse" style="animation-delay: 0.8s;">4394545</span></li>
+                </ul>
+                <hr class="my-4 border-gray-700" />
+                <p class="text-center text-gray-100 text-xl font-bold animate-heartbeat">16</p>
+                <p class="text-center text-sm text-gray-500">Online</p>
+                <p class="text-center text-sm mt-2">21 November 2024</p>
+            </div>
+        
+            <!-- QR Code Section -->
+            <div class="animate-slideInUp delay-700">
+                <h3 class="text-lg font-semibold text-white mb-3 gradient-text">QR Code</h3>
+                <div class="relative w-32 h-32 mx-auto mb-2 animate-float">
+                    <img src="https://via.placeholder.com/120x120" alt="QR Code" class="mx-auto hover-scale" />
+                    <div class="absolute inset-0 bg-orange-500 bg-opacity-20 rounded animate-pulse" style="animation-duration: 3s;"></div>
+                </div>
+                <p class="text-center text-gray-500 text-sm">www.nik-o-mat.de</p>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 text-sm mt-8 animate-fadeIn delay-1000">
+            <p>Copyright © 2020-2023 Hawler Medical University. All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-orange-500 text-white rounded-full p-3 shadow-lg hidden hover:bg-orange-600 transition duration-300 animate-bounce-slow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('nav-toggle');
+        const mobileMenu = document.getElementById('nav-content');
+        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Scroll Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        };
+        
+        // Reveal animations on scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        
+        window.addEventListener("scroll", reveal);
+        reveal(); // To check the initial state
+    </script>
+</body>
+</html>

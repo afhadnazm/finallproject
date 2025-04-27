@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Council</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body class="bg-white text-gray-900 scroll-smooth " style="font-family: Cambria, Georgia, serif" >
+
+<!-- Navbar -->
+<nav class="bg-white shadow-md fixed top-0 left-0 w-full z-10 ">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center ">
+
+                <!-- Logo -->
+                <div class="size-40 font-bold text-red-600 py-6 ">
+                    <img src="{{ asset('storage/images/logo.jpg') }}" alt="Logo">
+                </div>
+
+                <!-- Menu Items (Hidden on mobile) -->
+                <div class="hidden md:flex space-x-6 text-xl font-bold relative mx-auto">
+                    <!-- Home Dropdown -->
+                    <div class="relative group">
+                        <a href="/" class="text-gray-600 hover:text-red-600 flex items-center">
+                            HOME
+                            <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
+                        <div class="absolute mt-2 hidden group-hover:block bg-white shadow-md rounded-lg p-4 pr-12 left-0">
+                            <a href="{{ url('/aboutus') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">About us</a>
+                            <a href="{{ url('/contactus') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Contact us</a>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Other Links -->
+                    <div class="relative group">
+                        <a href="#" class="text-gray-600 hover:text-red-600 flex items-center">
+                           DIVISONS
+                            <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
+
+                        <div class="absolute mt-2 hidden group-hover:block bg-white shadow-md rounded-lg p-4 pr-12 left-0">
+                            <a href="{{ url('/universitycounsel') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">University Counsil</a>
+                            <a href="{{ url('/presidentoffice') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">President's Office</a>
+                            <a href="{{ url('/vission') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Vision and Mission</a>
+                            <a href="{{ url('/logo') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">University Logo</a>
+                        </div>
+                    </div>
+                        <div class="relative group">
+                            <a href="#" class="text-gray-600 hover:text-red-600 flex items-center">
+                             COLLEGE
+                                <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
+                            <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
+                            <div class="absolute mt-2 hidden group-hover:block bg-white shadow-md rounded-lg p-4 pr-12 left-0">
+                                <a href="{{ route('colleges.medicine') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">College of Medicine</a>
+                                <a href="{{ route('colleges.dentistry') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">College of Dentistry</a>
+                                <a href="{{ route('colleges.pharmacy') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">College of Pharmacy</a>
+                                <a href="{{ route('colleges.nursing') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">College of Nursing</a>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <a href="#" class="text-gray-600 hover:text-red-600 flex items-center">
+                            FEATURE
+                                <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
+                            <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
+                            <div class="absolute mt-2 hidden group-hover:block bg-white shadow-md rounded-lg p-4 pr-12 left-0">
+                                <a href="{{ url('/library') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Library</a>
+                                <a href="{{ url('/confrance') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Confrances</a>
+                                <a href="{{ url('/relevantwebs') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Relevant Websites</a>
+                                <a href="{{ url('/acadimicrelations') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Academic Relations</a>
+                                <a href="{{ url('/acadimicprofile') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Academicians Profile</a>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <a href="" class="text-gray-600 hover:text-red-600 flex items-center">
+                           SERVICE
+                                <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
+                            <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
+                            <div class="absolute mt-2 hidden group-hover:block bg-white shadow-md rounded-lg p-4 pr-12 left-0">
+                                <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">IT Services</a>
+                                <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Documents</a>
+                                <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">E-Managment</a>
+                                
+                            </div>
+                        </div>
+                   <div>
+                    <a href="#" class="text-gray-600 hover:text-red-600">EVENTS</a>
+                    
+                   </div>
+                   <div class="relative group">
+                    <a href="#" class="text-gray-600 hover:text-red-600 flex items-center">
+                   PORTAL
+                        <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
+                    <div class="absolute mt-2 hidden group-hover:block bg-white shadow-md rounded-lg p-4 pr-12 left-0">
+                        <a href="/student_login" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Student Portal</a>
+                        <a href="/teacher_login" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Teacher Portal</a>                        
+                    </div>
+                </div>
+                   
+                 
+                
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="nav-toggle" class="text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Mobile Menu (Initially Hidden) -->
+            <div id="nav-content" class="hidden md:hidden">
+                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Dashboard</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">About</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Services</a>
+                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Contact</a>
+            </div>
+      
+        </div>
+    </nav>
+
+<!-- Header -->
+ <div class="py-52 container mx-auto">
+<div class="text-center mb-8" id="all">
+  <h1 class="text-4xl font-bold text-gray-800 mb-2">Academicians Profile</h1>
+  <div class="flex justify-center gap-4 text-sm text-gray-600">
+    <span>BLOG</span>
+    <span>|</span>
+    <span>HMU</span>
+    <span>|</span>
+    <span>25 APRIL 2021</span>
+    
+  </div>
+</div>
+
+<!-- Filter Buttons -->
+<div class="flex flex-wrap justify-center gap-2 mb-6">
+  <a href="#all" class="bg-orange-300 text-white px-4 py-2 rounded hover:bg-orange-500">All</a>
+  <a href="#college-medicine" class="bg-orange-300 text-white px-4 py-2 rounded hover:bg-orange-500">College of Medicine</a>
+  <a href="#college-dentistry" class="bg-orange-300 text-white px-4 py-2 rounded hover:bg-orange-500">College of Dentistry</a>
+  <a href="#college-pharmacy" class="bg-orange-300 text-white px-4 py-2 rounded hover:bg-orange-500">College of Pharmacy</a>
+  <a href="#college-nursing" class="bg-orange-300 text-white px-4 py-2 rounded hover:bg-orange-500">College of Nursing</a>
+  <a href="#college-health-sciences" class="bg-orange-300 text-white px-4 py-2 rounded hover:bg-orange-500">College of Health Sciences</a>
+
+</div>
+
+<!-- Search Bar -->
+<div class="flex justify-center mb-8">
+  <input type="text" placeholder="Search..." class="w-1/2 px-4 py-2 rounded border border-gray-300 focus:outline-none">
+</div>
+
+<!-- Content Sections -->
+<div class="space-y-16">
+
+  <!-- Dean Section -->
+  <section id="dean">
+  <h2 class="text-2xl font-semibold mb-6">Dean</h2>
+  <div class="grid grid-cols- md:grid-cols-3 gap-6">
+    
+    <!-- Card -->
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/dashty.png') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Dashty Abbas Tawfeeq</h3>
+        <p class="text-sm text-gray-600">Assistant Professor</p>
+        <p class="text-sm text-gray-500">
+          Department of Medicine<br>
+          College of Medicine
+        </p>
+      </div>
+    </div>
+
+    <!-- Repeat for others -->
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/bassam.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Bassam Karem Amin</h3>
+        <p class="text-sm text-gray-600">Assistant Professor</p>
+        <p class="text-sm text-gray-500">
+        Department of Conservative Dentistry<br>
+        College of Dentistry
+        </p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/huner.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">
+        Huner kamal omer</h3>
+        <p class="text-sm text-gray-600">Assistant Professor</p>
+        <p class="text-sm text-gray-500">
+        Department of Phrmaceutics<br>
+        College of Pharmacy
+        </p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/vian.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Vian Afan Naqshbandi</h3>
+        <p class="text-sm text-gray-600">Assistant Professor</p>
+        <p class="text-sm text-gray-500">
+          Department of  Nursing<br>
+          College of  Nursing
+        </p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/hamida.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">
+        Hamdia Mirkhan Ahmed</h3>
+        <p class="text-sm text-gray-600">Professor</p>
+        <p class="text-sm text-gray-500">
+        Department of Physiotherapy<br>
+        College of Health Sciences
+        </p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/aza.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Aza Bahadeen Taha</h3>
+        <p class="text-sm text-gray-600">Assistant Professor</p>
+        <p class="text-sm text-gray-500">
+      
+          Medical Research Center
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- Head of Department Section -->
+  <section id="head-department">
+  <h2 class="text-2xl font-semibold mb-6">Head Of Department</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- Card 1 -->
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/ali.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Ali Hussain ASTORKI</h3>
+        <p class="text-sm text-gray-600">Lecturer</p>
+        <p class="text-sm text-gray-500">
+          Department of Physiotherapy<br>
+          College of Health Sciences
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/katan.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">
+        Katan Sabir Ali</h3>
+        <p class="text-sm text-gray-600">Assistant Professor</p>
+        <p class="text-sm text-gray-500">
+        Department of Medical <br> Microbiology<br>
+        College of Health Sciences
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/rundk.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">
+        Rundk Ahmad Hwaiz</h3>
+        <p class="text-sm text-gray-600">Assistant Professor</p>
+        <p class="text-sm text-gray-500">
+        Department of Nutrition and Dietetics
+        <br>
+          College of Health Sciences
+        </p>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/sangar.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Sangar Muhammad AHMED</h3>
+        <p class="text-sm text-gray-600">Lecturer</p>
+        <p class="text-sm text-gray-500">
+        Department of Public Health<br>
+          College of Health Sciences
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- College of Medicine Section -->
+  <section id="college-medicine">
+  <h2 class="text-2xl font-semibold mb-6">College of Medicine</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/dashty.png') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Dashty Abbas Tawfeeq</h3>
+        <p class="text-sm text-gray-600">Assistant Professor</p>
+        <p class="text-sm text-gray-500">Department of Medicine<br>College of Medicine</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/abbas.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Abbas Abdulqader Ahmed</h3>
+        <p class="text-sm text-gray-600">Professor</p>
+        <p class="text-sm text-gray-500">Department of Pediatrics<br>College of Medicine</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/abdulkadr.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">
+        Abdulkadr Muhammed Sleman Alany</h3>
+        <p class="text-sm text-gray-600">Assistant Professor</p>
+        <p class="text-sm text-gray-500">Department of  Surgery<br>College of Medicine</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/abdulkareem.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">
+        Abdulkareem Abdulwahhab Abdulkareem</h3>
+        <p class="text-sm text-gray-600">Professor</p>
+        <p class="text-sm text-gray-500">Department of Medicine<br>College of Medicine</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/abdulkhaliq.png') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Abdulkhaliq Kerim Emin</h3>
+        <p class="text-sm text-gray-600">Assistant Professor</p>
+        <p class="text-sm text-gray-500">Department of Surgery<br>College of Medicine</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/afrah.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">
+        Afrah Hameed Sultan</h3>
+        <p class="text-sm text-gray-600">Assistant Professor</p>
+        <p class="text-sm text-gray-500">Department of Basic Sciences<br>College of Medicine</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/ala.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Ala Omer Salih</h3>
+        <p class="text-sm text-gray-600">Lecturer</p>
+        <p class="text-sm text-gray-500">Department of Surgery<br>College of Medicine</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/aras.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Aras Raafiq Abdullah</h3>
+        <p class="text-sm text-gray-600">Lecturer</p>
+        <p class="text-sm text-gray-500">Department of Surgery<br>College of Medicine</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/avin.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">
+        Avin Sadiq Jamil</h3>
+        <p class="text-sm text-gray-600">Lecturer</p>
+        <p class="text-sm text-gray-500">Department of Obstetrics and Gynecology<br>College of Medicine</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/bestun.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Bestun Omer Saleh</h3>
+        <p class="text-sm text-gray-600">Lecturer</p>
+        <p class="text-sm text-gray-500">Department of Surgery<br>College of Medicine</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/chro.jpeg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Chro Yaseen Qader</h3>
+        <p class="text-sm text-gray-600">Lecturer</p>
+        <p class="text-sm text-gray-500">Department of Basic Sciences<br>College of Medicine</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/hast.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Hast Karim Ali</h3>
+        <p class="text-sm text-gray-600">Lecturer
+        </p>
+        <p class="text-sm text-gray-500">Department of Surgery<br>College of Medicine</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center space-x-4">
+      <img src="{{ asset('storage/images/haval.jpg') }}" alt="Profile" class="w-24 h-24 object-cover rounded-lg">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800">Haval Sabr</h3>
+        <p class="text-sm text-gray-600">Lecturer</p>
+        <p class="text-sm text-gray-500">Department of Surgery<br>College of Medicine</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <!-- College of Dentistry Section -->
+  <section id="college-dentistry">
+  <h2 class="text-2xl font-semibold mb-6">College of Dentistry</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/bassam.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Bassam Kareem Amin</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Conservative Dentistry <br> Collage of Dentistry</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/ahmed.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Ahmed Hasan Ahmed</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Conservative Dentistry <br> Collage of Dentistry</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/alaa.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Alaa Mahmud Mustafa</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Pedodontics, Orthodontics and Preventive Dentistry (POP)<br> Collage of Dentistry</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/araz.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Araz Muhammad Yousif</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Basic Sciences <br> Collage of Dentistry</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/asma.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Asmaa Qasim Rahman</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Oral Diagnosis and Oral Medicine<br> Collage of Dentistry</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/aso.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">ASO AKO MUHAMMAD</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Conservative Dentistry <br> Collage of Dentistry</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/aveen.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">
+        aveen ageel jalal</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Periodontology<br> Collage of Dentistry</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/barzan.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Barzan Abdulwahab MirzaOmer</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Periodontology <br> Collage of Dentistry</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/fahd.jpeg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">
+        Fahd Sudad Ikram</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Prosthodontics<br> Collage of Dentistry</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/nabeel.jpeg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Nabeel Seryoka Hanna Martani</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Conservative Dentistry <br> Collage of Dentistry</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/nyaz.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Niaz Salih Abdulla</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Basic Sciences <br> Collage of Dentistry</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/rezhaw.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">
+        Rezhaw Omar Hasan</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Oral Diagnosis and Oral Medicine <br> College of Pharmacy <br> Collage of Dentistry</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- College of Pharmacy Section -->
+  <section id="college-pharmacy">
+    <h2 class="text-2xl font-semibold mb-4">College of Pharmacy</h2>
+   
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/huner.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Huner kamal omer</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Phrmaceutics<br> College of Pharmacy</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/2abas.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Abbas Mohamed Faraj</h3>
+        <p class="text-sm text-gray-500">Professor</p>
+        <p class="text-sm text-gray-400">Department of Clinical Analysis<br> College of Pharmacy</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/adnan3.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Adnan Burhan Qader</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Phrmaceutics <br> College of Pharmacy</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/anjam.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Anjam Hama Abdullah</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Phrmaceutics <br> College of Pharmacy</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/ansam.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Ansam Naji Alhassani</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Pharmacolog<br> College of Pharmacy</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/aram.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">
+        Aram Sardar Ibrahim</h3>
+        <p class="text-sm text-gray-500">Assistant Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Clinical Pharmacy<br> College of Pharmacy</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/asmaa.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Asmaa Awni Haydar</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Pharmacology<br> College of Pharmacy</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/azheen.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Azheen Sedeeq Ahmed</h3>
+        <p class="text-sm text-gray-500">Assistant  Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Clinical Analysis <br> College of Pharmacy</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/bano.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Bano Anwar Othman</h3>
+        <p class="text-sm text-gray-500">Assistant  Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Clinical Analysis <br> College of Pharmacy</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/belan.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Belan Rahman Mustafa</h3>
+        <p class="text-sm text-gray-500">Assistant Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Clinical Pharmacy<br> College of Pharmacy</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/bashdar.jpeg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Bashdar Mahmud Hussen/h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Clinical Analysis<br> College of Pharmacy</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/bootan.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Bootan Abdulqader Salih</h3>
+        <p class="text-sm text-gray-500">Assistant Lecturer <br> College of Nursing</p>
+        <p class="text-sm text-gray-400">Department of Clinical Pharmacy<br> College of Pharmacy</p>
+      </div>
+    </div>
+
+  </div>
+  </section>
+
+  <!-- College of Nursing Section -->
+  <section id="college-nursing">
+    <h2 class="text-2xl font-semibold mb-4">College of Nursing</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/vian2.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Vian Afan Naqshbandi</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of  Nursing <br> College of Nursing</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/abuzed.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">
+        Abuzed Saber Kareem</h3>
+        <p class="text-sm text-gray-500">Assistant Lecturer</p>
+        <p class="text-sm text-gray-400">Department of  Nursing <br> College of Nursing</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/adnan2.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Adnan Rasheed Aziz</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Nursing<br> College of Nursing</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/ahmed2.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Ahmed Naif Ali</h3>
+        <p class="text-sm text-gray-500">Assistant Lecturer
+        </p>
+        <p class="text-sm text-gray-400">Department of Nursing<br> College of Nursing</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/ahmed3.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Ahmed Ali Rasool</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Nursing<br> College of Nursing</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/ali2.jpeg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Ali Taher Mohammedameen</h3>
+        <p class="text-sm text-gray-500">Assistant Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Nursing<br> College of Nursing</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/amanj2.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Amanj Yassin Hamad Amin</h3>
+        <p class="text-sm text-gray-500">Assistant Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Nursing<br> College of Nursing</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/ammar.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Ammar AbdulJabbar Mohamed</h3>
+        <p class="text-sm text-gray-500">Assistant Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Nursing <br> College of Nursing</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/awaz.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Awaz Aziz Saeed</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Nursing<br> College of Nursing</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/azheen2.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Azheen Muhammed Rasul</h3>
+        
+        <p class="text-sm text-gray-400">Department of Nursing<br> College of Nursing</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/azzadin.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Azzadin Kamal Mahmod/h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Nursing<br> College of Nursing</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/bahjat.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Bahjat Ahmed Mohammad</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Nursing<br> College of Nursing</p>
+      </div>
+    </div>
+
+  </div>
+  </section>
+
+  <!-- College of Health Sciences Section -->
+  <section id="college-health-sciences">
+    <h2 class="text-2xl font-semibold mb-4">College of Health Sciences</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/hamida2.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Hamdia Mirkhan Ahmed</h3>
+        <p class="text-sm text-gray-500">Professor</p>
+        <p class="text-sm text-gray-400">Department of Conservative Dentistry <br>College of Health Sciences</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/ali.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Ali Hussein ASTOKORKI</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of CPhysiotherapy <br>College of Health Sciences</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/katan.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Katan Sabir Ali</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Medical Microbiology<br>College of Health Sciences</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/rundk.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Rundk Ahmad Hwaiz</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Nutrition and Dietetics <br>College of Health Sciences</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/sangar.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Sangar Muhammad AHMED</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Public Health <br>College of Health Sciences</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/ahang2.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Ahang Hasan Mawlood</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of  Medical Microbiology <br>College of Health Sciences</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/ahmad.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Ahmed Akil</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of  Medical Microbiology <br>College of Health Sciences</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/alla.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Alla'a Miyasar Ahmed</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Medical Microbiology<br>College of Health Sciences</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/amani.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Amani Layth Alsagheer</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Clinical Biochemistry <br>College of Health Sciences</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/amer.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Amer Ali Khaleel</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of  Medical Microbiology <br>College of Health Sciences</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/dler.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Dler Qader Gallaly</h3>
+        <p class="text-sm text-gray-500">Assistant Professor</p>
+        <p class="text-sm text-gray-400">Department of Physiotherapy<br>College of Health Sciences</p>
+      </div>
+    </div>
+
+    <div class="flex bg-white rounded-xl shadow p-4 items-center">
+      <img src="{{ asset('storage/images/hangaw.jpg') }}" class="w-24 h-24 rounded-lg object-cover mr-4" alt="Profile">
+      <div>
+        <h3 class="text-lg font-semibold">Hangaw Omar Haji</h3>
+        <p class="text-sm text-gray-500">Lecturer</p>
+        <p class="text-sm text-gray-400">Department of Clinical Biochemistry<br>College of Health Sciences</p>
+      </div>
+    </div>
+
+  </div>
+  </section>
+
+
+
+
+</div>
+
+</div>
+
+<section class="w-full ">
+  <footer class="bg-gray-900 text-gray-300 py-10 px-4 md:px-6 lg:px-12">
+    <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Contact HMU Section -->
+      <div>
+        <h3 class="text-lg font-semibold text-white mb-4">Contact HMU</h3>
+        <ul class="space-y-2">
+          <li class="flex items-center">
+            <span class="mr-2">✉️</span>
+            <a href="mailto:info@hmu.edu.krd" class="hover:text-orange-500">info@hmu.edu.krd</a>
+          </li>
+          <li class="flex items-center">
+            <span class="mr-2">🌐</span>
+            <a href="http://www.hmu.edu.krd" class="hover:text-orange-500">www.hmu.edu.krd</a>
+          </li>
+          <li>Tel: +964 66 227 3384</li>
+          <li>Fax: +964 66 227 3382</li>
+          <li class="flex items-start">
+            <span class="mr-2">📍</span>
+            Iraq, Kurdistan Region,<br />
+            Erbil, 100M Street, Near Rizgary Teaching Hospital,<br />
+            P.O. Box 178
+          </li>
+        </ul>
+      </div>
+
+      <!-- Opening Hours Section -->
+      <div>
+        <h3 class="text-lg font-semibold text-white mb-4">Opening Hours</h3>
+        <p>Sunday - Thursday: <span class="text-gray-100">08:30 am - 03:00 pm</span></p>
+        <p>Friday and Saturday: <span class="bg-orange-500 text-white rounded px-2 py-1">Closed</span></p>
+      </div>
+
+      <!-- Web Traffic Section -->
+      <div>
+        <h3 class="text-lg font-semibold text-white mb-4">Web Traffic</h3>
+        <ul class="space-y-1">
+          <li>👤 Today: <span class="text-gray-100">2265</span></li>
+          <li>👤 Yesterday: <span class="text-gray-100">3898</span></li>
+          <li>👤 This Week: <span class="text-gray-100">12748</span></li>
+          <li>👤 This Month: <span class="text-gray-100">90849</span></li>
+          <li>👤 Total: <span class="text-gray-100">4394545</span></li>
+        </ul>
+        <hr class="my-4 border-gray-700" />
+        <p class="text-center text-gray-100 text-xl font-bold">16</p>
+        <p class="text-center text-sm text-gray-500">Online</p>
+        <p class="text-center text-sm mt-2">21 November 2024</p>
+      </div>
+
+      <!-- QR Code Section -->
+      <div>
+        <h3 class="text-lg font-semibold text-white mb-4">QR Code</h3>
+        <img src="https://via.placeholder.com/120x120" alt="QR Code" class="mx-auto mb-2" />
+        <p class="text-center text-gray-500 text-sm">www.nik-o-mat.de</p>
+      </div>
+    </div>
+    <div class="text-center text-gray-500 text-sm mt-8">
+      <p>Copyright © 2020-2023 Hawler Medical University. All Rights Reserved</p>
+    </div>
+  </footer>
+</section>
+
+</body>
+</html>

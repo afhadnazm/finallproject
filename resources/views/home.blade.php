@@ -37,10 +37,9 @@
                         </a>
                         <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
                         <div class="absolute mt-2 hidden group-hover:block bg-white shadow-md rounded-lg p-4 pr-12 left-0">
-                            <a href="about.html" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">About us</a>
-                            <a href="contact.html" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Contact us</a>
-                            <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Vision and Mission</a>
-                            <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">University Logo</a>
+                            <a href="{{ url('/aboutus') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">About us</a>
+                            <a href="{{ url('/contactus') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Contact us</a>
+                            
                         </div>
                     </div>
                     
@@ -55,10 +54,10 @@
                         <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
 
                         <div class="absolute mt-2 hidden group-hover:block bg-white shadow-md rounded-lg p-4 pr-12 left-0">
-                            <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">University Counsil</a>
-                            <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">President's Office</a>
-                            <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Vision and Mission</a>
-                            <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">University Logo</a>
+                            <a href="{{ url('/universitycounsel') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">University Counsil</a>
+                            <a href="{{ url('/presidentoffice') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">President's Office</a>
+                            <a href="{{ url('/vission') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Vision and Mission</a>
+                            <a href="{{ url('/logo') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">University Logo</a>
                         </div>
                     </div>
                         <div class="relative group">
@@ -86,11 +85,11 @@
                             </a>
                             <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
                             <div class="absolute mt-2 hidden group-hover:block bg-white shadow-md rounded-lg p-4 pr-12 left-0">
-                                <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Library</a>
-                                <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Confrances</a>
-                                <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Relevant Websites</a>
-                                <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Academic Relations</a>
-                                <a href="#" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Academicians Profile</a>
+                                <a href="{{ url('/library') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Library</a>
+                                <a href="{{ url('/confrance') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Confrances</a>
+                                <a href="{{ url('/relevantwebs') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Relevant Websites</a>
+                                <a href="{{ url('/acadimicrelations') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Academic Relations</a>
+                                <a href="{{ url('/acadimicprofile') }}" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Academicians Profile</a>
                             </div>
                         </div>
 
@@ -126,25 +125,6 @@
                         <a href="/teacher_login" class="block py-2 text-gray-600 hover:text-red-600 whitespace-nowrap">Teacher Portal</a>                        
                     </div>
                 </div>
-
-                <div class="relative group  translate-x-20  -translate-y-2">
-                            <a href="/admin_login" class="text-gray-600 hover:text-red-600 flex items-center">
-                            <button type="login" class="text-white bg-gradient-to-r from-red-500 via-red-500 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg  px-10 py-2 text-center me-2 mb-0 text-xl">
-                            <div class="flex flex-row items-center justify-center">
-                                <div class="mr-2">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="font-bold">Sign In</div>
-                            </div>
-                        </button>
-                            </a>
-                          
-                        </div>
                    
                  
                 

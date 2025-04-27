@@ -25,6 +25,37 @@ use App\Http\Controllers\LoginController;
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/aboutus', function () {
+    return view('aboutus');
+});
+Route::get('/universitycounsel', function () {
+    return view('universitycounsel');
+});
+Route::get('/presidentoffice', function () {
+    return view('presidentoffice');
+});
+Route::get('/library', function () {
+    return view('library');
+});
+Route::get('/relevantwebs', function () {
+    return view('relevantwebs');
+});
+Route::get('/acadimicrelations', function () {
+    return view('acadimicrelations');
+});
+Route::get('/acadimicprofile', function () {
+    return view('acadimicprofile');
+});
+Route::get('/contactus', function () {
+    return view('contactus');
+});
+Route::get('/vission', function () {
+    return view('vission');
+});
+Route::get('/logo', function () {
+    return view('logo');
+});
 Route::get('/grades', function () {
     return view('grade');
 });
