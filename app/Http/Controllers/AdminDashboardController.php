@@ -26,8 +26,19 @@ class AdminDashboardController extends Controller
         $totalpensdinStudents = pending_student::count();
         $stages = Stage::all();
         $semesters = Semester::all();
-        $subjects = Subject::all();
-        return view('admin.index', compact('pendingStudents', 'totalStudents', 'admin', 'totalpensdinStudents', 'teachers', 'stages', 'semesters', 'subjects'));
+        $subjects = Subject::with(['stage', 'semester', 'teacher'])->get(); // <-- FIXED
+
+        return view('admin.index', compact(
+            'pendingStudents',
+            'totalStudents',
+            'admin',
+            'totalpensdinStudents',
+            'teachers',
+            'stages',
+            'semesters',
+            'subjects'
+        ));
+
 
 
     }
@@ -70,9 +81,9 @@ class AdminDashboardController extends Controller
         ]);
 
         // Optionally copy verification notes if needed
-        if ($pendingStudent->verification_notes) {
-            $student->update(['verification_notes' => $pendingStudent->verification_notes]);
-        }
+
+        $student->update(['status' => 'approved']);
+
 
         // Delete the pending student record
         $pendingStudent->delete();
@@ -84,14 +95,11 @@ class AdminDashboardController extends Controller
 
 
 
-    public function reject(Request $request, Student $student)
+    public function reject(pending_student $pendingStudent)
     {
-        $request->validate(['reason' => 'required|string']);
-        $student->update([
-            'status' => 'rejected',
-            'rejection_reason' => $request->reason
-        ]);
-        return back()->with('error', 'Student rejected.');
+
+        $pendingStudent->delete();
+        return back()->with('succes', 'Student rejected.');
     }
     public function register(Request $request)
     {
@@ -127,6 +135,33 @@ class AdminDashboardController extends Controller
 
     public function store_subject(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'stage' => 'required|integer|exists:stages,id',
+            'semester' => 'required|integer|exists:semesters,id',
+            'teacher_id' => 'nullable|exists:teachers,id',
+        ]);
+
+        Subject::create([
+            'name' => $request->name,
+            'stage_id' => $request->stage,
+            'semester_id' => $request->semester,
+            'teacher_id' => $request->teacher_id,
+        ]);
+
+
+        return back()->with('success', 'Subject created successfully!');
+    }
+    public function destroy_subject(Subject $subject)
+    {
+        $subject->delete();
+
+        return back()->with('success', 'Subject deleted successfully!');
+    }
+    // app/Http/Controllers/Admin/SubjectController.php
+
+    public function update_subject(Request $request, Subject $subject)
+    {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'stage_id' => 'required|exists:stages,id',
@@ -134,8 +169,11 @@ class AdminDashboardController extends Controller
             'teacher_id' => 'required|exists:teachers,id',
         ]);
 
-        Subject::create($validated);
+        $subject->update($validated);
 
-        return back()->with('success', 'Subject created successfully!');
+        return response()->json([
+            'redirect' => route('admin.dashboard'),
+            'message' => 'Subject updated successfully'
+        ]);
     }
 }

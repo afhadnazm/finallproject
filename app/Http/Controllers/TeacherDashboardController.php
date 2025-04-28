@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Grade;
+use App\Models\Subject;
 
 class TeacherDashboardController extends Controller
 {
@@ -14,9 +15,13 @@ class TeacherDashboardController extends Controller
     }
     public function dashboard()
     {
-        $teacher = auth()->user();
-        $subjects = $teacher->subjects()->with('students')->get();
-        return view('teacher.dashboard', compact('subjects'));
+        $teacher = auth()->guard('teacher')->user();
+
+        $subjects = Subject::with(['students', 'stage', 'semester'])
+            ->where('teacher_id', $teacher->id)
+            ->get();
+
+        return view('teacher.index', compact('subjects'));
     }
 
     public function login(Request $request)
@@ -39,30 +44,25 @@ class TeacherDashboardController extends Controller
         Auth::guard('teacher')->logout();
         return redirect()->route('login.from.teacher');
     }
-    public function store(Request $request)
+
+    public function updateGrades(Request $request)
     {
-        $request->validate([
-            'student_id' => 'required|exists:students,id',
-            'subject_id' => 'required|exists:subjects,id',
-            'semester_id' => 'required|exists:semesters,id',
-            'grade' => 'required|numeric|min:0|max:100',
-        ]);
+        $gradesData = $request->grades;
 
-        $teacher = auth('teacher')->user();
+        foreach ($gradesData as $id => $data) {
+            $grade = Grade::find($id);
 
-        Grade::updateOrCreate(
-            [
-                'student_id' => $request->student_id,
-                'subject_id' => $request->subject_id,
-                'semester_id' => $request->semester_id,
-                'teacher_id' => $teacher->id,
-            ],
-            [
-                'grade' => $request->grade,
-            ]
-        );
+            $grade->midterm = $data['midterm'];
+            $grade->final = $data['final'];
+            $grade->practical = $data['practical'];
+            $grade->total = ($data['midterm'] ?? 0) + ($data['final'] ?? 0) + ($data['practical'] ?? 0);
+            $grade->comments = $data['comments'] ?? null;
 
-        return back()->with('success', 'Grade saved successfully!');
+            $grade->save();
+        }
+
+        return back()->with('success', 'Grades updated successfully!');
     }
+
 
 }

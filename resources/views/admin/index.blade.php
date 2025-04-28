@@ -9,9 +9,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 font-sans min-h-screen overflow-y-auto bg-gray-100">
     <div class="flex h-screen overflow-hidden">
         <!-- Desktop Sidebar -->
         <div class="hidden md:flex md:flex-shrink-0">
@@ -36,8 +38,7 @@
                                 <i class="fas fa-user-graduate mr-3"></i>
                                 Students
                             </div>
-                            <span
-                                class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full">23</span>
+
                         </a>
                         <a href="#" id="subjects-menu"
                             class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
@@ -89,7 +90,7 @@
             </header>
 
             <!-- Main Content Area -->
-            <class="flex-1 overflow-y-auto p-4 bg-gray-50">
+            <div class="flex-1 overflow-y-auto p-4 bg-gray-50">
                 <!-- Dashboard View -->
                 <div id="dashboard-view">
                     <!-- Stats Cards -->
@@ -332,14 +333,19 @@
                             </div>
                         </div>
                     @endforeach
+                    @if ($errors->any())
+                        <div class="mb-4 p-4 bg-red-100 border border-red-200 text-red-700 rounded">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>- {{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div>
                 <!-- After the dashboard-view and students-view sections, add: -->
                 <div id="teachers-view">
                     <div class="w-full  bg-white rounded-xl shadow-lg overflow-hidden">
-                        <!-- Header -->
-
-
-                        <!-- Form -->
 
                         <div class="container mx-auto px-4 py-8">
                             <h1 class="text-3xl font-bold mb-6">All Teachers</h1>
@@ -413,7 +419,8 @@
 
                 </div>
                 <!-- Header -->
-                <div id="signup_view">
+                <div id="signup_view"
+                    class="max-w-4xl mx-auto p-8 bg-white rounded-xl shadow-lg overflow-hidden mt-6 hidden">
                     <div class="bg-blue-600 py-6 px-8 text-center">
                         <i class="fas fa-chalkboard-teacher text-white text-5xl mb-3"></i>
                         <h1 class="text-2xl font-bold text-white">Teacher Registration</h1>
@@ -566,327 +573,496 @@
                             class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 transform hover:scale-[1.02] shadow-md">
                             <i class="fas fa-user-check mr-2"></i> Submit for signup
                         </button>
-
-                        <!-- Error Messages -->
-                        @if($errors->any())
-                            <div class="mt-6 bg-red-50 border-l-4 border-red-500 p-4">
-                                <div class="flex">
-                                    <div class="flex-shrink-0">
-                                        <i class="fas fa-exclamation-circle text-red-500 mt-1"></i>
-                                    </div>
-                                    <div class="ml-3">
-                                        <p class="text-sm text-red-700">
-                                            @foreach($errors->all() as $error)
-                                                {{ $error }}<br>
-                                            @endforeach
-                                        </p>
-                                    </div>
+                    </form>
+                    <!-- Error Messages -->
+                    @if($errors->any())
+                        <div class="mt-6 bg-red-50 border-l-4 border-red-500 p-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-circle text-red-500 mt-1"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-red-700">
+                                        @foreach($errors->all() as $error)
+                                            {{ $error }}<br>
+                                        @endforeach
+                                    </p>
                                 </div>
                             </div>
-                        @endif
+                        </div>
+                    @endif
 
 
+
+                </div>
+
+
+
+
+
+
+
+                <div id="subjects_create_view"
+                    class="w-full bg-white rounded-xl shadow-lg p-8 overflow-y-auto max-h-screen">
+                    @if(session('success'))
+                        <div class="mb-4 p-4 bg-green-100 border border-green-200 text-green-700 rounded">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Name</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Stage</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Semester</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Teacher</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    @foreach($subjects as $subject)
+                                        <tr
+                                            x-data="{ editing: false, subject: {{ json_encode($subject) }}, original: {{ json_encode($subject) }} }">
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span x-show="!editing" x-text="subject.name"
+                                                    class="text-sm font-medium text-gray-900"></span>
+                                                <input x-show="editing" x-model="subject.name" type="text"
+                                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+                                            </td>
+                                            <!-- Stage Column -->
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span x-show="!editing" x-text="subject.stage ? subject.stage.name : 'N/A'"
+                                                    class="text-sm text-gray-500"></span>
+                                                <select x-show="editing" x-model="subject.stage_id"
+                                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+                                                    @foreach($stages as $stage)
+                                                        <option value="{{ $stage->id }}">{{ $stage->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+
+                                            <!-- Semester Column -->
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span x-show="!editing"
+                                                    x-text="subject.semester ? subject.semester.name : 'N/A'"
+                                                    class="text-sm text-gray-500"></span>
+                                                <select x-show="editing" x-model="subject.semester_id"
+                                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+                                                    @foreach($semesters as $semester)
+                                                        <option value="{{ $semester->id }}">{{ $semester->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+
+                                            <!-- Teacher Column -->
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span x-show="!editing"
+                                                    x-text="subject.teacher ? (subject.teacher.first_name + ' ' + subject.teacher.last_name) : 'N/A'"
+                                                    class="text-sm text-gray-500"></span>
+                                                <select x-show="editing" x-model="subject.teacher_id"
+                                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border">
+                                                    @foreach($teachers as $teacher)
+                                                        <option value="{{ $teacher->id }}">{{ $teacher->first_name }}
+                                                            {{ $teacher->last_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <template x-if="!editing">
+                                                    <button @click="editing = true"
+                                                        class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</button>
+                                                </template>
+                                                <template x-if="editing">
+                                                    <div class="flex space-x-2">
+                                                        <button @click="
+                                                                                    axios.put(`/admin/subjects/${subject.id}`, {
+                                                                                        name: subject.name,
+                                                                                        stage_id: subject.stage_id,
+                                                                                        semester_id: subject.semester_id,
+                                                                                        teacher_id: subject.teacher_id
+                                                                                    })
+                                                                                    .then(response => {
+                                                                                        editing = false;
+                                                                                        original = JSON.parse(JSON.stringify(subject));
+                                                                                        alert('Changes saved successfully!');
+                                                                                    })
+                                                                                    .catch(error => {
+                                                                                        console.error('Error:', error.response.data);
+                                                                                        alert('Error: ' + (error.response.data.message || 'Failed to save'));
+                                                                                    });
+                                                                                "
+                                                            class="text-green-600 hover:text-green-900">Save</button>
+
+                                                        <button @click="editing = false; subject = original"
+                                                            class="text-gray-600 hover:text-gray-900">Cancel</button>
+                                                    </div>
+                                                </template>
+
+                                                <form action="{{ route('admin.subjects.destroy', $subject->id) }}"
+                                                    method="POST" class="inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-600 hover:text-red-900"
+                                                        onclick="return confirm('Are you sure you want to delete this subject?')">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script>
+                    document.addEventListener('alpine:init', () => {
+                        Alpine.data('subjectTable', () => ({
+                            init() {
+                                // Any initialization code if needed
+                            }
+                        }))
+                    })
+                </script>
+
+                <div class=" bg-white rounded-xl shadow-lg overflow-hidden p-8" id="subjects-view">
+                    <h1 class="text-2xl font-bold text-gray-800 mb-6">Create New Subject</h1>
+
+
+
+                    <form action="{{ route('admin.subjects.store') }}" method="POST" class="space-y-6">
+                        @csrf
+
+                        <div>
+                            <label class="block text-gray-700">Subject Name</label>
+                            <input type="text" name="name" class="w-full mt-2 p-2 border rounded" required>
+                        </div>
+
+
+                        <div>
+                            <label class="block text-gray-700">Stage</label>
+                            <select name="stage" class="w-full mt-2 p-2 border rounded" required>
+                                @foreach($stages as $stage)
+                                    <option value="{{ $stage->id }}">{{ $stage->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700">Semester</label>
+                            <select name="semester" class="w-full mt-2 p-2 border rounded" required>
+                                @foreach($semesters as $semester)
+                                    <option value="{{ $semester->id }}">{{ $semester->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700">Assign Teacher</label>
+                            <select name="teacher_id" class="w-full mt-2 p-2 border rounded">
+                                <option value="">-- None --</option>
+                                @foreach($teachers as $teacher)
+                                    <option value="{{ $teacher->id }}">{{ $teacher->first_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <button type="submit"
+                                class="px-6 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+                                Create Subject
+                            </button>
+                        </div>
                     </form>
                 </div>
-        </div>
-        <!-- End of Students View -->
 
 
+                <!-- Mobile sidebar overlay -->
+                <div class="fixed inset-0 z-40 hidden" id="mobile-sidebar">
+                    <div class="fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity"
+                        id="mobile-sidebar-backdrop"></div>
+                    <div class="fixed inset-y-0 left-0 flex max-w-xs w-full">
+                        <div class="relative w-64 bg-gray-800">
+                            <!-- Close button -->
+                            <button id="mobile-menu-close" class="absolute top-4 right-4 text-white focus:outline-none">
+                                <i class="fas fa-times text-xl"></i>
+                            </button>
 
-
-
-        <div id="subjects-view" class="w-full bg-white rounded-xl shadow-lg overflow-hidden p-8">
-            <div class="flex justify-between items-center mb-6">
-                <h1 class="text-2xl font-bold text-gray-800">Subjects</h1>
-                <a href="{{ route('admin.subjects.store') }}"
-                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Create New Subject
-                </a>
-            </div>
-
-            @if(session('success'))
-                <div class="mb-4 p-4 bg-green-100 border border-green-200 text-green-700 rounded">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Name
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Stage
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Semester</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Teacher</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach($subjects as $subject)
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                        {{ $subject->name }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $subject->stage->name }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $subject->semester->name }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $subject->teacher->name }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
-                                        <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Mobile sidebar overlay -->
-        <div class="fixed inset-0 z-40 hidden" id="mobile-sidebar">
-            <div class="fixed inset-0 bg-gray-600 bg-opacity-75 transition-opacity" id="mobile-sidebar-backdrop"></div>
-            <div class="fixed inset-y-0 left-0 flex max-w-xs w-full">
-                <div class="relative w-64 bg-gray-800">
-                    <!-- Close button -->
-                    <button id="mobile-menu-close" class="absolute top-4 right-4 text-white focus:outline-none">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-
-                    <!-- Mobile sidebar content -->
-                    <div class="flex flex-col h-full">
-                        <div class="flex items-center h-16 px-4 bg-gray-900">
-                            <span class="text-white font-semibold text-lg">AdminPanel</span>
-                        </div>
-                        <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
-                            <nav class="flex-1 space-y-2">
-                                <a href="#" class="flex items-center px-4 py-2 text-gray-100 bg-gray-700 rounded-lg">
-                                    <i class="fas fa-tachometer-alt mr-3"></i>
-                                    Dashboard
-                                </a>
-                                <a href="#"
-                                    class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
-                                    <i class="fas fa-users mr-3"></i>
-                                    Users
-                                </a>
-                                <a href="#" id="mobile-students-menu"
-                                    class="flex items-center justify-between px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
+                            <!-- Mobile sidebar content -->
+                            <div class="flex flex-col h-full">
+                                <div class="flex items-center h-16 px-4 bg-gray-900">
+                                    <span class="text-white font-semibold text-lg">AdminPanel</span>
+                                </div>
+                                <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
+                                    <nav class="flex-1 space-y-2">
+                                        <a href="#"
+                                            class="flex items-center px-4 py-2 text-gray-100 bg-gray-700 rounded-lg">
+                                            <i class="fas fa-tachometer-alt mr-3"></i>
+                                            Dashboard
+                                        </a>
+                                        <a href="#"
+                                            class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
+                                            <i class="fas fa-users mr-3"></i>
+                                            Users
+                                        </a>
+                                        <a href="#" id="mobile-students-menu"
+                                            class="flex items-center justify-between px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
+                                            <div class="flex items-center">
+                                                <i class="fas fa-user-graduate mr-3"></i>
+                                                Students
+                                            </div>
+                                            <span
+                                                class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full">23</span>
+                                        </a>
+                                        <a href="#"
+                                            class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
+                                            <i class="fas fa-cog mr-3"></i>
+                                            Settings
+                                        </a>
+                                        <a href="#"
+                                            class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
+                                            <i class="fas fa-chart-bar mr-3"></i>
+                                            Reports
+                                        </a>
+                                    </nav>
+                                </div>
+                                <div class="p-4 border-t border-gray-700">
                                     <div class="flex items-center">
-                                        <i class="fas fa-user-graduate mr-3"></i>
-                                        Students
+                                        <img class="w-10 h-10 rounded-full" src="" alt="Admin">
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-200">
+                                                Admin
+                                                User</p>
+                                            <p class="text-xs font-medium text-gray-400">
+                                                admin@example.com</p>
+                                        </div>
                                     </div>
-                                    <span
-                                        class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full">23</span>
-                                </a>
-                                <a href="#"
-                                    class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
-                                    <i class="fas fa-cog mr-3"></i>
-                                    Settings
-                                </a>
-                                <a href="#"
-                                    class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
-                                    <i class="fas fa-chart-bar mr-3"></i>
-                                    Reports
-                                </a>
-                            </nav>
-                        </div>
-                        <div class="p-4 border-t border-gray-700">
-                            <div class="flex items-center">
-                                <img class="w-10 h-10 rounded-full" src="" alt="Admin">
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-200">
-                                        Admin
-                                        User</p>
-                                    <p class="text-xs font-medium text-gray-400">
-                                        admin@example.com</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <script>
+                    document.addEventListener('alpine:init', () => {
+                        Alpine.data('subjectRow', () => ({
+                            editing: false,
+                            originalData: {},
+                            subject: {},
+
+                            init() {
+                                this.originalData = JSON.parse(JSON.stringify(this.subject));
+                            },
+
+                            save() {
+                                fetch(this.$el.getAttribute('data-update-url'), {
+                                    method: 'PUT',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                                    },
+                                    body: JSON.stringify(this.subject)
+                                })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        this.editing = false;
+                                        this.originalData = JSON.parse(JSON.stringify(data));
+                                    })
+                                    .catch(error => console.error('Error:', error));
+                            },
+
+                            cancel() {
+                                this.subject = JSON.parse(JSON.stringify(this.originalData));
+                                this.editing = false;
+                            }
+                        }));
+                    });
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Mobile menu functionality
+                        const mobileMenuButton = document.getElementById('mobile-menu-button');
+                        const mobileMenuClose = document.getElementById('mobile-menu-close');
+                        const mobileSidebar = document.getElementById('mobile-sidebar');
+                        const backdrop = document.getElementById('mobile-sidebar-backdrop');
+                        const mobileTeachersMenu = document.getElementById('mobile-teachers-menu');
+
+                        mobileMenuButton.addEventListener('click', function () {
+                            mobileSidebar.classList.remove('hidden');
+                            document.body.style.overflow = 'hidden';
+                        });
+
+                        function closeMenu() {
+                            mobileSidebar.classList.add('hidden');
+                            document.body.style.overflow = '';
+                        }
+
+                        mobileMenuClose.addEventListener('click', closeMenu);
+                        backdrop.addEventListener('click', closeMenu);
+
+                        document.querySelectorAll('#mobile-sidebar a').forEach(item => {
+                            item.addEventListener('click', closeMenu);
+                        });
+
+                        // View switching functionality
+                        const studentsMenu = document.getElementById('students-menu');
+                        const mobileStudentsMenu = document.getElementById('mobile-students-menu');
+                        const dashboardMenu = document.getElementById('dashboard-menu');
+                        const dashboardView = document.getElementById('dashboard-view');
+                        const studentsView = document.getElementById('students-view');
+                        const teachersMenu = document.getElementById('teachers-menu');
+                        const teachersView = document.getElementById('teachers-view');
+                        const signupView = document.getElementById('signup_view');
+                        const teacherSignup = document.getElementById('teacher_signup');
+                        const subjectsView = document.getElementById('subjects-view');
+                        const subjectsMenu = document.getElementById('subjects-menu');
+                        const subjectsCreateView = document.getElementById('subjects_create_view');
+
+                        function showStudentsView() {
+                            dashboardView.classList.add('hidden');
+                            teachersView.classList.add('hidden');
+                            signupView.classList.add('hidden');
+                            studentsView.classList.remove('hidden');
+                            subjectsView.classList.add('hidden');
+                            subjectsCreateView.classList.add('hidden');
+
+
+                            studentsMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            teachersMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            subjectsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                        }
+
+                        function showDashboardView() {
+                            dashboardView.classList.remove('hidden');
+                            studentsView.classList.add('hidden');
+                            teachersView.classList.add('hidden');
+                            signupView.classList.add('hidden');
+                            subjectsView.classList.add('hidden');
+                            subjectsCreateView.classList.add('hidden');
+
+                            // Highlight Dashboard
+                            dashboardMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            // Remove highlight from Students
+                            studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            teachersMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            subjectsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                        }
+
+                        function showTeachersView() {
+                            dashboardView.classList.add('hidden');
+                            studentsView.classList.add('hidden');
+                            teachersView.classList.remove('hidden');
+                            signupView.classList.add('hidden');
+                            subjectsView.classList.add('hidden');
+                            subjectsCreateView.classList.add('hidden');
+
+                            // Update active states
+                            dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            // Remove highlight from Students
+                            studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            teachersMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            subjectsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                        }
+                        function showTeacherssignup() {
+                            dashboardView.classList.add('hidden');
+                            studentsView.classList.add('hidden');
+                            teachersView.classList.remove('hidden');
+                            signupView.classList.remove('hidden');
+                            subjectsView.classList.add('hidden');
+                            subjectsCreateView.classList.add('hidden');
+
+                            // Update active states
+                            dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            // Remove highlight from Students
+                            studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            teachersMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            subjectsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                        }
+                        function showsubject() {
+                            dashboardView.classList.add('hidden');
+                            studentsView.classList.add('hidden');
+                            teachersView.classList.add('hidden');
+                            signupView.classList.add('hidden');
+                            subjectsView.classList.remove('hidden');
+                            subjectsCreateView.classList.remove('hidden');
+
+                            // Update active states
+                            dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            // Remove highlight from Students
+                            studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            teachersMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                            subjectsMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
+                        }
+                        showDashboardView();
+
+                        // Event listeners for menu items
+                        studentsMenu.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            showStudentsView();
+                        });
+
+                        mobileStudentsMenu.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            showStudentsView();
+                            closeMenu();
+                        });
+
+                        dashboardMenu.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            showDashboardView();
+                        });
+
+                        teachersMenu.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            showTeachersView();
+                        });
+                        teacherSignup.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            showTeacherssignup();
+                        });
+                        subjectsMenu.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            showsubject();
+                        });
+
+                        // Missing event listener for mobileTeachersMenu
+                        mobileTeachersMenu.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            showTeachersView();
+                            closeMenu();
+                        });
+                    });
+
+                    document.querySelector('form').addEventListener('submit', function (e) {
+                        const password = document.getElementById('password').value;
+                        const confirmPassword = document.getElementById('password_confirmation').value;
+
+                        if (password !== confirmPassword) {
+                            e.preventDefault();
+                            alert('Passwords do not match!');
+                            return;
+                        }
+                    });
+                </script>
             </div>
         </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // Mobile menu functionality
-                const mobileMenuButton = document.getElementById('mobile-menu-button');
-                const mobileMenuClose = document.getElementById('mobile-menu-close');
-                const mobileSidebar = document.getElementById('mobile-sidebar');
-                const backdrop = document.getElementById('mobile-sidebar-backdrop');
-                const mobileTeachersMenu = document.getElementById('mobile-teachers-menu');
-
-                mobileMenuButton.addEventListener('click', function () {
-                    mobileSidebar.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                });
-
-                function closeMenu() {
-                    mobileSidebar.classList.add('hidden');
-                    document.body.style.overflow = '';
-                }
-
-                mobileMenuClose.addEventListener('click', closeMenu);
-                backdrop.addEventListener('click', closeMenu);
-
-                document.querySelectorAll('#mobile-sidebar a').forEach(item => {
-                    item.addEventListener('click', closeMenu);
-                });
-
-                // View switching functionality
-                const studentsMenu = document.getElementById('students-menu');
-                const mobileStudentsMenu = document.getElementById('mobile-students-menu');
-                const dashboardMenu = document.getElementById('dashboard-menu');
-                const dashboardView = document.getElementById('dashboard-view');
-                const studentsView = document.getElementById('students-view');
-                const teachersMenu = document.getElementById('teachers-menu');
-                const teachersView = document.getElementById('teachers-view');
-                const signupView = document.getElementById('signup_view');
-                const teacherSignup = document.getElementById('teacher_signup');
-                const subjectsView = document.getElementById('subjects-view');
-                const subjectsMenu = document.getElementById('subjects-menu');
-
-                function showStudentsView() {
-                    dashboardView.classList.add('hidden');
-                    teachersView.classList.add('hidden');
-                    signupView.classList.add('hidden');
-                    studentsView.classList.remove('hidden');
-                    subjectsView.classList.add('hidden');
-
-
-                    studentsMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    teachersMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    subjectsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                }
-
-                function showDashboardView() {
-                    dashboardView.classList.remove('hidden');
-                    studentsView.classList.add('hidden');
-                    teachersView.classList.add('hidden');
-                    signupView.classList.add('hidden');
-                    subjectsView.classList.add('hidden');
-
-                    // Highlight Dashboard
-                    dashboardMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    // Remove highlight from Students
-                    studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    teachersMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    subjectsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                }
-
-                function showTeachersView() {
-                    dashboardView.classList.add('hidden');
-                    studentsView.classList.add('hidden');
-                    teachersView.classList.remove('hidden');
-                    signupView.classList.add('hidden');
-                    subjectsView.classList.add('hidden');
-
-                    // Update active states
-                    dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    // Remove highlight from Students
-                    studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    teachersMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    subjectsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                }
-                function showTeacherssignup() {
-                    dashboardView.classList.add('hidden');
-                    studentsView.classList.add('hidden');
-                    teachersView.classList.remove('hidden');
-                    signupView.classList.remove('hidden');
-                    subjectsView.classList.add('hidden');
-
-                    // Update active states
-                    dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    // Remove highlight from Students
-                    studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    teachersMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    subjectsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                }
-                function showsubject() {
-                    dashboardView.classList.add('hidden');
-                    studentsView.classList.add('hidden');
-                    teachersView.classList.add('hidden');
-                    signupView.classList.add('hidden');
-                    subjectsView.classList.remove('hidden');
-
-                    // Update active states
-                    dashboardMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    // Remove highlight from Students
-                    studentsMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    teachersMenu.classList.remove('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                    subjectsMenu.classList.add('bg-gray-700', 'text-white', 'font-semibold', 'rounded-md');
-                }
-                showDashboardView();
-
-                // Event listeners for menu items
-                studentsMenu.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    showStudentsView();
-                });
-
-                mobileStudentsMenu.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    showStudentsView();
-                    closeMenu();
-                });
-
-                dashboardMenu.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    showDashboardView();
-                });
-
-                teachersMenu.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    showTeachersView();
-                });
-                teacherSignup.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    showTeacherssignup();
-                });
-                subjectsMenu.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    showsubject();
-                });
-
-                // Missing event listener for mobileTeachersMenu
-                mobileTeachersMenu.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    showTeachersView();
-                    closeMenu();
-                });
-            });
-
-            document.querySelector('form').addEventListener('submit', function (e) {
-                const password = document.getElementById('password').value;
-                const confirmPassword = document.getElementById('password_confirmation').value;
-
-                if (password !== confirmPassword) {
-                    e.preventDefault();
-                    alert('Passwords do not match!');
-                    return;
-                }
-            });
-        </script>
+    </div>
 </body>
 
 </html>

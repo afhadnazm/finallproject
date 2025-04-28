@@ -15,18 +15,39 @@ class StudentDashboardController extends Controller
     {
         return view('student.login');
     }
+    // app/Http/Controllers/StudentController.php
     public function dashboard()
     {
         $student = Auth::guard('student')->user();
-        ;
 
-        $registeredSubjects = $student->subjects()->with('teacher')->get();
-        $availableSubjects = Subject::whereNotIn('id', $registeredSubjects->pluck('id'))->get();
-        $grades = Grade::where('student_id', auth('student')->id())
-            ->with(['subject', 'semester'])
+        // Get available subjects for the student's stage and semester
+        $availableSubjects = Subject::where('stage_id', $student->stage_id)
+            ->where('semester_id', $student->semester_id)
+            ->whereDoesntHave('students', function ($query) use ($student) {
+                $query->where('student_id', $student->id);
+            })
+            ->with('teacher')
             ->get();
-        return view('student.index', compact('student', 'registeredSubjects', 'availableSubjects', 'grades'));
+
+        // Get registered subjects
+        $registeredSubjects = $student->subjects()
+            ->wherePivot('status', 'approved')
+            ->with('teacher')
+            ->get();
+
+        // Get grades
+        $grades = Grade::where('student_id', $student->id)
+            ->with('subject')
+            ->get();
+
+        return view('student.index', compact(
+            'student',
+            'availableSubjects',
+            'registeredSubjects',
+            'grades'
+        ));
     }
+
     public function subject_register(Request $request)
     {
         $request->validate([
@@ -103,21 +124,5 @@ class StudentDashboardController extends Controller
 
         return redirect()->route('login.from.student');
     }
-    public function download(pending_student $document)
-    {
-        if (!Storage::exists($document->file_path)) {
-            abort(404, 'File not found');
-        }
 
-        $extension = pathinfo($document->file_path, PATHINFO_EXTENSION);
-        $filename = "{$document->student->name}_{$document->document_type}.{$extension}";
-
-        return Storage::download($document->file_path, $filename);
-    }
-
-    public function show(Student $student)
-    {
-        $documents = $student->documents;
-        return view('admin.students.documents', compact('student', 'documents'));
-    }
 }

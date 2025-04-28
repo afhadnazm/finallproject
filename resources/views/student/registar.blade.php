@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div>
-                        <label for="last_name" class="block text-gray-700 text-sm font-medium mb-2">Department*</label>
+                        <label for="Department" class="block text-gray-700 text-sm font-medium mb-2">Department*</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-user text-gray-400"></i>

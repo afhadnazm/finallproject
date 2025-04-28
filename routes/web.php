@@ -102,7 +102,7 @@ Route::prefix('student')->group(function () {
     Route::post('/logout', [StudentDashboardController::class, 'logout'])->name('logout.student')->middleware('student');
     Route::get('/login', [StudentDashboardController::class, 'index'])->name('login.from.student');
     Route::post('/register', [StudentDashboardController::class, 'register'])->name('register.student');
-    Route::post('/student/register-subject', [StudentDashboardController::class, 'register'])->name('student.register.subject');
+    Route::post('/student/register-subject', [StudentDashboardController::class, 'subject_register'])->name('student.register.subject');
 
 });
 Route::prefix('teacher')->group(function () {
@@ -122,13 +122,12 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminDashboardController::class, 'index'])->name('login.from.admin');
     Route::get('/admin/students/pending', [AdminDashboardController::class, 'showPendingStudents'])->name('admin.students.pending');
     Route::post('/admin/students/{pending_student}/approve', [AdminDashboardController::class, 'approve'])->name('admin.students.approve');
-    Route::post('/admin/students/{student}/reject', [AdminDashboardController::class, 'reject'])->name('admin.students.reject');
+    Route::post('/admin/students/{pending_student}/reject', [AdminDashboardController::class, 'reject'])->name('admin.students.reject');
     Route::post('/teacher/register-subject', [AdminDashboardController::class, 'register'])->name('teacher.register.subject');
-    Route::get('/documents/{document}/download', [StudentDashboardController::class, 'download'])
-        ->name('admin.students.documents.download');
-    Route::get('/{student}/documents', [StudentDashboardController::class, 'show'])
-        ->name('admin.students.documents.show');
-    Route::post('/subjects', [StudentDashboardController::class, 'store_subject'])->name('admin.subjects.store');
+    Route::post('/subjects', [AdminDashboardController::class, 'store_subject'])->name('admin.subjects.store');
+    Route::delete('/subjects/{subject}', [AdminDashboardController::class, 'destroy_subject'])->name('admin.subjects.destroy');
+    Route::put('/subjects/{subject}', [AdminDashboardController::class, 'update_subject'])
+        ->name('admin.subjects.update');
 });
 
 

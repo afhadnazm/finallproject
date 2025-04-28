@@ -37,7 +37,8 @@ class Student extends Authenticatable
     ];
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class, 'subject_student');
+        return $this->belongsToMany(Subject::class, 'subject_student')
+            ->withPivot('status', 'created_at', 'updated_at');
     }
 
     public function grades()
