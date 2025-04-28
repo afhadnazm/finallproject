@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>Library - Hawler Medical University</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -292,165 +293,268 @@
     </style>
 </head>
 
-<body class="bg-gray-100" style="font-family: Cambria, Georgia, serif">
+<body class="" style="font-family: Cambria, Georgia, serif; max-width: 100%;
+  overflow-x: hidden;">
     <!-- Scroll Progress Bar -->
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
 
     <!-- Decorative Elements -->
-    <div class="circle-decoration bg-orange-200 w-64 h-64 top-40 -left-20 animate-float" style="animation-delay: 0s;"></div>
-    <div class="circle-decoration bg-orange-100 w-96 h-96 top-96 -right-40 animate-float" style="animation-delay: 2s;"></div>
-    <div class="circle-decoration bg-orange-50 w-48 h-48 bottom-40 left-1/4 animate-float" style="animation-delay: 1s;"></div>
+  
 
     <!-- Simplified Navbar -->
-    <nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-10 animate-fadeIn glass-effect">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <img src="{{ asset('storage/images/logo.jpg') }}" alt="Logo" class="h-10 w-10 rounded-md">
-                    <span class="ml-2 text-lg font-semibold text-orange-600">Hawler Medical University</span>
-                </div>
-
-                <!-- Menu Items (Hidden on mobile) -->
-                <div class="hidden md:flex space-x-1">
-                    <!-- Home Dropdown -->
-                    <div class="relative dropdown">
-                        <a href="/" class="nav-item text-gray-700 flex items-center">
-                            HOME
-                            <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </a>
-                        <div class="dropdown-content">
-                            <div class="py-2 px-4">
-                                <a href="about.html" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">About us</a>
-                                <a href="contact.html" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Contact us</a>
-                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Vision and Mission</a>
-                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">University Logo</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Other Links -->
-                    <div class="relative dropdown">
-                        <a href="#" class="nav-item text-gray-700 flex items-center">
-                           DIVISIONS
-                            <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </a>
-                        <div class="dropdown-content">
-                            <div class="py-2 px-4">
-                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">University Counsil</a>
-                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">President's Office</a>
-                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Vision and Mission</a>
-                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">University Logo</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="relative dropdown">
-                        <a href="#" class="nav-item text-gray-700 flex items-center">
-                         COLLEGE
-                            <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </a>
-                        <div class="dropdown-content">
-                            <div class="py-2 px-4">
-                                <a href="{{ route('colleges.medicine') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Medicine</a>
-                                <a href="{{ route('colleges.dentistry') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Dentistry</a>
-                                <a href="{{ route('colleges.pharmacy') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Pharmacy</a>
-                                <a href="{{ route('colleges.nursing') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Nursing</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative dropdown">
-                        <a href="#" class="nav-item text-gray-700 flex items-center">
-                        FEATURE
-                            <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </a>
-                        <div class="dropdown-content">
-                            <div class="py-2 px-4">
-                                <a href="library.html" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Library</a>
-                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Conferences</a>
-                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Relevant Websites</a>
-                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Academic Relations</a>
-                                <a href="#" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Academicians Profile</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative dropdown">
-                        <a href="#" class="nav-item text-gray-700 flex items-center">
-                       SERVICE
-                            <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </a>
-                         <div class="dropdown-content">
-                          
-                        </div> 
-                    </div>
-                   
-                    <a href="" class="nav-item text-gray-700">EVENTS</a>
-                    
-                    <div class="relative dropdown">
-                        <a href="#" class="nav-item text-gray-700 flex items-center">
-                       PORTAL
-                            <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </a>
-                        <div class="dropdown-content">
-                            <div class="py-2 px-4">
-                                <a href="/student_login" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Student Portal</a>
-                                <a href="/teacher_login" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Teacher Portal</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex items-center">
-                    <!-- Login Button -->
-                    <button type="button" class="hidden md:block text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-orange-300 font-medium rounded-lg px-4 py-1.5 text-sm">Login</button>
-                    
-                    <!-- Mobile menu button -->
-                    <button id="nav-toggle" class="md:hidden text-orange-600 focus:outline-none p-2 rounded-lg hover:bg-orange-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile Menu (Initially Hidden) -->
-            <div id="nav-content" class="hidden md:hidden py-3 border-t border-gray-200 animate-slideInUp">
-                <!-- Mobile menu content here -->
-            </div>
+    <nav class="bg-white backdrop-blur-md shadow-sm fixed top-0 left-0 w-full z-40 p-4 sm:p-6">
+    <div class="container mx-auto px-2 sm:px-4">
+      <div class="flex justify-between items-center h-12 sm:h-16">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <img src="{{ asset('storage/images/logo.jpg') }}" alt="Logo" class="h-8 w-8 sm:h-12 sm:w-12 md:h-16 md:w-16 rounded-md">
+          <span class="ml-1 sm:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-orange-600">Hawler Medical University</span>
         </div>
-    </nav>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex space-x-1">
+          <!-- Home Dropdown -->
+          <div class="relative group">
+            <a href="/" class="px-2 py-2 text-sm xl:text-base text-gray-700 flex items-center hover:text-orange-600 transition-colors duration-200">
+              HOME
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+            <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div class="py-2 px-4">
+                <a href="{{ url('/aboutus') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">About us</a>
+                <a href="{{ url('/contactus') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Contact us</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Divisions Dropdown -->
+          <div class="relative group">
+            <a href="#" class="px-2 py-2 text-sm xl:text-base text-gray-700 flex items-center hover:text-orange-600 transition-colors duration-200">
+              DIVISIONS
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+            <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div class="py-2 px-4">
+                <a href="{{ url('/universitycounsel') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">University Counsil</a>
+                <a href="{{ url('/presidentoffice') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">President's Office</a>
+                <a href="{{ url('/vission') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Vision and Mission</a>
+                <a href="{{ url('/logo') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">University Logo</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- College Dropdown -->
+          <div class="relative group">
+            <a href="#" class="px-2 py-2 text-sm xl:text-base text-gray-700 flex items-center hover:text-orange-600 transition-colors duration-200">
+              COLLEGE
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+            <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div class="py-2 px-4">
+                <a href="{{ route('colleges.medicine') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Medicine</a>
+                <a href="{{ route('colleges.pharmacy') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Pharmacy</a>
+                <a href="{{ route('colleges.nursing') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Nursing</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature Dropdown -->
+          <div class="relative group">
+            <a href="#" class="px-2 py-2 text-sm xl:text-base text-gray-700 flex items-center hover:text-orange-600 transition-colors duration-200">
+              FEATURE
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+            <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div class="py-2 px-4">
+                <a href="{{ url('/library') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Library</a>
+                <a href="{{ url('/relevantwebs') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Relevant Websites</a>
+                <a href="{{ url('/acadimicrelations') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Academic Relations</a>
+                <a href="{{ url('/acadimicprofile') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Academicians Profile</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Dropdown -->
+          <div class="relative group">
+            <a href="#" class="px-2 py-2 text-sm xl:text-base text-gray-700 flex items-center hover:text-orange-600 transition-colors duration-200">
+              SERVICE
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+            <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div class="py-2 px-4">
+                <a href="{{ url('/it') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">IT Services</a>
+                <a href="{{ url('/documents') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Documents</a>
+                <a href="{{ url('/e-management') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">E-Management</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="{{ url('/events') }}" class="px-2 py-2 text-sm xl:text-base text-gray-700 hover:text-orange-600 transition-colors duration-200">EVENTS</a>
+
+          <!-- Portal Dropdown -->
+          <div class="relative group">
+            <a href="#" class="px-2 py-2 text-sm xl:text-base text-gray-700 flex items-center hover:text-orange-600 transition-colors duration-200">
+              PORTAL
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+            <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div class="py-2 px-4">
+                <a href="/student_login" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Student Portal</a>
+                <a href="/teacher_login" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Teacher Portal</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="lg:hidden">
+          <button id="menu-btn" class="text-orange-500 focus:outline-none">
+            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-lg rounded-b-lg overflow-hidden">
+        <div class="px-2 sm:px-4 py-2 space-y-1">
+          <!-- Mobile Accordion Menu -->
+          <div class="mobile-accordion">
+            <button class="flex justify-between items-center w-full py-2 text-sm sm:text-base text-gray-700 hover:text-orange-600">
+              <span>HOME</span>
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 text-orange-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="hidden px-2 sm:px-4 py-2 bg-gray-50 rounded-lg">
+              <a href="/" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">Home</a>
+              <a href="{{ url('/aboutus') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">About Us</a>
+              <a href="{{ url('/contactus') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">Contact Us</a>
+            </div>
+          </div>
+
+          <div class="mobile-accordion">
+            <button class="flex justify-between items-center w-full py-2 text-sm sm:text-base text-gray-700 hover:text-orange-600">
+              <span>DIVISIONS</span>
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 text-orange-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="hidden px-2 sm:px-4 py-2 bg-gray-50 rounded-lg">
+              <a href="{{ url('/universitycounsel') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">University Council</a>
+              <a href="{{ url('/presidentoffice') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">President's Office</a>
+              <a href="{{ url('/vission') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">Vision and Mission</a>
+              <a href="{{ url('/logo') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">University Logo</a>
+            </div>
+          </div>
+
+          <div class="mobile-accordion">
+            <button class="flex justify-between items-center w-full py-2 text-sm sm:text-base text-gray-700 hover:text-orange-600">
+              <span>COLLEGE</span>
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 text-orange-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="hidden px-2 sm:px-4 py-2 bg-gray-50 rounded-lg">
+              <a href="{{ route('colleges.medicine') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">College of Medicine</a>
+              <a href="{{ route('colleges.pharmacy') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">College of Pharmacy</a>
+              <a href="{{ route('colleges.nursing') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">College of Nursing</a>
+            </div>
+          </div>
+
+          <div class="mobile-accordion">
+            <button class="flex justify-between items-center w-full py-2 text-sm sm:text-base text-gray-700 hover:text-orange-600">
+              <span>FEATURE</span>
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 text-orange-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="hidden px-2 sm:px-4 py-2 bg-gray-50 rounded-lg">
+              <a href="{{ url('/library') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">Library</a>
+              <a href="{{ url('/relevantwebs') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">Relevant Websites</a>
+              <a href="{{ url('/acadimicrelations') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">Academic Relations</a>
+              <a href="{{ url('/acadimicprofile') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">Academicians Profile</a>
+            </div>
+          </div>
+
+          <div class="mobile-accordion">
+            <button class="flex justify-between items-center w-full py-2 text-sm sm:text-base text-gray-700 hover:text-orange-600">
+              <span>SERVICE</span>
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 text-orange-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="hidden px-2 sm:px-4 py-2 bg-gray-50 rounded-lg">
+              <a href="{{ url('/it-service') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">IT Services</a>
+              <a href="{{ url('/documents') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">Documents</a>
+              <a href="{{ url('/e-management') }}" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">E-Management</a>
+            </div>
+          </div>
+
+          <a href="{{ url('/events') }}" class="block py-2 text-sm sm:text-base text-gray-700 hover:text-orange-600">EVENTS</a>
+
+          <div class="mobile-accordion">
+            <button class="flex justify-between items-center w-full py-2 text-sm sm:text-base text-gray-700 hover:text-orange-600">
+              <span>PORTAL</span>
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 text-orange-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="hidden px-2 sm:px-4 py-2 bg-gray-50 rounded-lg">
+              <a href="/student_login" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">Student Portal</a>
+              <a href="/teacher_login" class="block py-1 text-xs sm:text-sm text-gray-600 hover:text-orange-600">Teacher Portal</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
 
     <!-- Header Section - Updated to match the example -->
-    <section class="bg-gradient-to-r from-orange-200 via-orange-100 to-orange-200 py-12 shadow animate-fadeIn relative overflow-hidden mt-16">
-        <div class="container mx-auto text-center relative z-10">
-            <h1 class="text-5xl font-extrabold text-gray-800 tracking-tight">University Library</h1>
-            <p class="text-orange-600 mt-4 text-lg">Home / Services / Library</p>
-        </div>
-        <!-- Animated background elements -->
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-            <div class="absolute w-20 h-20 bg-orange-300 rounded-full opacity-20 top-1/4 left-1/4 animate-bounce-slow"></div>
-            <div class="absolute w-16 h-16 bg-orange-400 rounded-full opacity-20 top-3/4 left-1/3 animate-bounce-slow" style="animation-delay: 1s;"></div>
-            <div class="absolute w-24 h-24 bg-orange-200 rounded-full opacity-20 top-1/3 right-1/4 animate-bounce-slow" style="animation-delay: 2s;"></div>
-        </div>
-    </section>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 pt-28 bg-white">
+        <div class="bg-white py-10 px-6 shadow-lg rounded-lg" data-aos="fade-up">
+            <!-- Title -->
+            <h1 class="text-4xl font-bold text-center text-gray-900 gradient-text">University Library</h1>
+
+            <!-- Separator Line -->
+            <div class="w-full max-w-4xl mx-auto border-t border-gray-200 mt-4 mb-2"></div>
+
+            <!-- Metadata -->
+            <div class="flex justify-center items-center space-x-4 text-gray-600 text-sm mb-4">
+                <div class="flex items-center space-x-1 animate-fadeIn delay-100">
+                    <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M5 3a2 2 0 00-2 2v14l4-4h11a2 2 0 002-2V5a2 2 0 00-2-2H5z"/>
+                    </svg>
+                    <span>PRESIDENCY</span>
+                </div>
+                <div class="flex items-center space-x-1 animate-fadeIn delay-200">
+                    <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 16H5V9h14v11z"/>
+                    </svg>
+                    <span>18 OCTOBER 2020</span>
+                </div>
+               
+            </div>
+
+            <!-- Section Title -->
+         
+        </div> </div>
 
     <!-- Main Content -->
     <main class="container mx-auto pt-12 pb-12 px-4">
@@ -461,13 +565,13 @@
             <div class="space-y-6">
                 <!-- E-Journals Section -->
                 <div class="library-section">
-                    <a href="#" class="text-xl text-blue-500 hover:text-orange-500 transition-colors">e-journals subscription through Hinari</a>
+                    <a href="https://login.research4life.org/tacgw/login.cshtml" class="text-xl text-blue-500 hover:text-orange-500 transition-colors">e-journals subscription through Hinari</a>
                     <p class="text-gray-600 mt-1">(Access to more than 21,000 e-journals)</p>
                 </div>
                 
                 <!-- E-Books Section -->
                 <div class="library-section">
-                    <a href="#" class="text-xl text-blue-500 hover:text-orange-500 transition-colors">e-books subscription through Hinari</a>
+                    <a href="https://login.research4life.org/tacgw/login.cshtml" class="text-xl text-blue-500 hover:text-orange-500 transition-colors">e-books subscription through Hinari</a>
                     <p class="text-gray-600 mt-1">(Access to more than 69,000 e-books)</p>
                 </div>
                 
@@ -478,8 +582,8 @@
                         <div class="flex justify-between items-center">
                             <h3 class="text-xl font-semibold text-gray-800">Library of the College of Medicine</h3>
                             <div class="space-x-4">
-                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
-                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
+                                <a href="https://hmu.edu.krd/attachments/article/1067/Medicine%20books.pdf" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
+                                <a href="https://hmu.edu.krd/attachments/article/1067/Medicine%20Theses.pdf" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
                             </div>
                         </div>
                     </div>
@@ -489,8 +593,8 @@
                         <div class="flex justify-between items-center">
                             <h3 class="text-xl font-semibold text-gray-800">Library of the College of Dentistry</h3>
                             <div class="space-x-4">
-                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
-                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
+                                <a href="https://hmu.edu.krd/attachments/article/1067/Dentistry%20books.pdf" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
+                                <a href="https://hmu.edu.krd/attachments/article/1067/Dentistry%20Theses.pdf" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
                             </div>
                         </div>
                     </div>
@@ -500,8 +604,8 @@
                         <div class="flex justify-between items-center">
                             <h3 class="text-xl font-semibold text-gray-800">Library of the College of Pharmacy</h3>
                             <div class="space-x-4">
-                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Book</a>
-                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
+                                <a href="https://drive.google.com/file/d/1pCtAsI8S1ALSaK7ns9E1pUvvmrvzxqHI/view?usp=sharing" class="text-gray-500 hover:text-orange-500 transition-colors">Book</a>
+                                <a href="https://hmu.edu.krd/attachments/article/1067/Pharmacy%20Theses.pdf" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
                             </div>
                         </div>
                     </div>
@@ -511,8 +615,8 @@
                         <div class="flex justify-between items-center">
                             <h3 class="text-xl font-semibold text-gray-800">Library of the College of Nursing</h3>
                             <div class="space-x-4">
-                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
-                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
+                                <a href="https://hmu.edu.krd/attachments/article/1067/Nursing%20books.pdf" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
+                                <a href="https://hmu.edu.krd/attachments/article/1067/Nursing%20Theses.pdf" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
                             </div>
                         </div>
                     </div>
@@ -522,8 +626,8 @@
                         <div class="flex justify-between items-center">
                             <h3 class="text-xl font-semibold text-gray-800">Library of the College of Health Sciences</h3>
                             <div class="space-x-4">
-                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
-                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Theses</a>
+                                <a href="https://hmu.edu.krd/attachments/article/1067/HealthSciences.pdf" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -533,7 +637,7 @@
                         <div class="flex justify-between items-center">
                             <h3 class="text-xl font-semibold text-gray-800">Library of the Medical Research Center</h3>
                             <div class="space-x-4">
-                                <a href="#" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
+                                <a href="https://hmu.edu.krd/attachments/article/1067/MRC_books.pdf" class="text-gray-500 hover:text-orange-500 transition-colors">Books</a>
                             </div>
                         </div>
                     </div>
@@ -576,7 +680,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-2">Online Catalog</h3>
                     <p class="text-gray-600 mb-4">Search our comprehensive catalog of books, journals, and other resources available in our libraries.</p>
-                    <a href="#" class="text-orange-500 hover:text-orange-700 font-medium">Access Catalog →</a>
+                   
                 </div>
                 
                 <!-- Resource 2 -->
@@ -586,7 +690,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-2">Research Databases</h3>
                     <p class="text-gray-600 mb-4">Access our collection of specialized medical and scientific research databases.</p>
-                    <a href="#" class="text-orange-500 hover:text-orange-700 font-medium">Explore Databases →</a>
+                  
                 </div>
                 
                 <!-- Resource 3 -->
@@ -596,7 +700,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-2">Library Services</h3>
                     <p class="text-gray-600 mb-4">Learn about our services including borrowing, reference assistance, interlibrary loans, and research support.</p>
-                    <a href="#" class="text-orange-500 hover:text-orange-700 font-medium">View Services →</a>
+                   
                 </div>
             </div>
         </div>
@@ -806,5 +910,14 @@
         window.addEventListener("scroll", reveal);
         reveal(); // To check the initial state
     </script>
+    <script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+</script>
+
 </body>
 </html>
