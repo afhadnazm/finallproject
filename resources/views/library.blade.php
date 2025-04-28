@@ -530,7 +530,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 pt-28 bg-white">
         <div class="bg-white py-10 px-6 shadow-lg rounded-lg" data-aos="fade-up">
             <!-- Title -->
-            <h1 class="text-4xl font-bold text-center text-gray-900 gradient-text">University Logo</h1>
+            <h1 class="text-4xl font-bold text-center text-gray-900 gradient-text">University Library</h1>
 
             <!-- Separator Line -->
             <div class="w-full max-w-4xl mx-auto border-t border-gray-200 mt-4 mb-2"></div>
