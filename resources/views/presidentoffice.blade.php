@@ -442,16 +442,15 @@
         }
     </script>
 </head>
-<body class="bg-white text-gray-900" style="font-family: Cambria, Georgia, serif">
+<body class="bg-white text-gray-900" style="font-family: Cambria, Georgia, serif; max-width: 100%;
+  overflow-x: hidden;">
     <!-- Scroll Progress Bar -->
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
 
     <!-- Decorative Elements -->
-    <div class="circle-decoration bg-orange-200 w-64 h-64 top-40 -left-20 animate-float" style="animation-delay: 0s;"></div>
-    <div class="circle-decoration bg-orange-100 w-96 h-96 top-96 -right-40 animate-float" style="animation-delay: 2s;"></div>
-    <div class="circle-decoration bg-orange-50 w-48 h-48 bottom-40 left-1/4 animate-float" style="animation-delay: 1s;"></div>
+    
 
     <!-- Navbar -->
     <nav class="bg-white shadow-md fixed top-0 left-0 w-full z-10 animate-fadeIn glass-effect">
@@ -588,22 +587,9 @@
     </nav>
 
     <!-- Hero Section with Page Title -->
-    <div class="bg-gradient-to-r from-orange-50 to-orange-100 pt-24">
-        <div class="container mx-auto px-4 py-16">
-            <div class="text-center" data-aos="fade-down">
-                <h1 class="text-5xl font-bold mb-4 gradient-text animate-fadeIn">President's Office</h1>
-                <p class="text-orange-500 mt-2 animate-fadeIn delay-300">
-                    <span class="hover-scale inline-block">Home</span> 
-                    <span class="inline-block mx-2">></span> 
-                    <span class="hover-scale inline-block">Divisions</span>
-                    <span class="inline-block mx-2">></span> 
-                    <span class="hover-scale inline-block">President's Office</span>
-                </p>
-            </div>
-        </div>
-    </div>
+  
 
-    <div class="max-w-5xl mx-auto px-4 py-12 text-gray-800">
+    <div class="max-w-5xl mx-auto px-4 py-52 text-gray-800">
         <!-- Image -->
         <div class="mb-8" data-aos="zoom-in">
             <div class="animated-border hover-lift">
@@ -618,7 +604,7 @@
                 University President
             </div>
             <span class="flex items-center gap-1 hover-scale"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6 2a1 1 0 000 2h8a1 1 0 000-2H6zM3 6a1 1 0 011-1h12a1 1 0 011 1v11a1 1 0 01-1 1H4a1 1 0 01-1-1V6z" /></svg> 13 October 2020</span>
-            <span class="flex items-center gap-1 hover-scale"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM9 9V5a1 1 0 012 0v4H9zm0 4a1 1 0 012 0 1 1 0 11-2 0z" /></svg> Hits: 11943</span>
+        
         </div>
 
         <!-- President Info -->

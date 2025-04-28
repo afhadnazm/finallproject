@@ -7,8 +7,15 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Home- HMU</title>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
+    /* Prevent horizontal overflow */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    
     /* Animation Keyframes */
     @keyframes fadeIn {
       from { opacity: 0; }
@@ -252,10 +259,25 @@
       border-radius: 50%;
       z-index: -1;
       opacity: 0.5;
+      max-width: 100%;
+      overflow: hidden;
     }
     
     .animate-bounce-slow {
       animation: bounce 4s ease-in-out infinite;
+    }
+
+    /* Ensure containers don't cause overflow */
+    .container {
+      max-width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    /* Fix logo size */
+    .logo-container {
+      width: 120px;
+      height: auto;
     }
   </style>
   <script>
@@ -302,8 +324,8 @@
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center">
         <!-- Logo -->
-        <div class="size-40 font-bold text-orange-600 py-6 hover-scale">
-          <img src="{{ asset('storage/images/logo.jpg') }}" alt="Logo">
+        <div class="logo-container font-bold text-orange-600 py-6 hover-scale">
+          <img src="{{ asset('storage/images/logo.jpg') }}" alt="Logo" class="w-full h-auto">
         </div>
 
         <!-- Menu Items (Hidden on mobile) -->
@@ -350,7 +372,7 @@
             <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
             <div class="dropdown-content">
               <a href="{{ route('colleges.medicine') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Medicine</a>
-              <a href="{{ route('colleges.dentistry') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Dentistry</a>
+              <!-- <a href="{{ route('colleges.dentistry') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Dentistry</a> -->
               <a href="{{ route('colleges.pharmacy') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Pharmacy</a>
               <a href="{{ route('colleges.nursing') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Nursing</a>
             </div>
@@ -366,7 +388,6 @@
             <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
             <div class="dropdown-content">
               <a href="{{ url('/library') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Library</a>
-              <a href="{{ url('/confrance') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Confrances</a>
               <a href="{{ url('/relevantwebs') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Relevant Websites</a>
               <a href="{{ url('/acadimicrelations') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Academic Relations</a>
               <a href="{{ url('/acadimicprofile') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Academicians Profile</a>
@@ -382,14 +403,14 @@
             </a>
             <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
             <div class="dropdown-content">
-              <a href="#" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">IT Services</a>
-              <a href="#" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Documents</a>
-              <a href="#" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">E-Managment</a>
+              <a href="{{ url('/it') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">IT Services</a>
+              <a href="{{ url('/documents') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Documents</a>
+              <a href="{{ url('/e-management') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">E-Managment</a>
             </div>
           </div>
           
-          <div>
-            <a href="#" class="nav-item text-gray-600 hover:text-orange-600">EVENTS</a>
+          <div class="relative dropdown group">
+            <a href="#" class="nav-item text-gray-600 hover:text-orange-600 flex items-center">EVENTS</a>
           </div>
           
           <div class="relative dropdown group">
@@ -432,13 +453,13 @@
   </nav>
 
   <!-- Image Section -->
-  <div class="w-full overflow-hidden pt-16 animate-fadeIn">
+  <div class="w-full overflow-hidden pt-16 animate-fadeIn" style="max-width: 100vw;">
     <img src="{{asset('storage/images/citadel.jpg')}}" alt="Below Navbar Image"
       class="w-full h-auto object-cover rounded-md">
   </div>
   
   <!-- Overlay Text -->
-  <div class="p-6 absolute inset-0 flex flex-col items-center justify-center text-white bg-black bg-opacity-40 mt-16">
+  <div class="p-6 absolute inset-0 flex flex-col items-center justify-center text-white  bg-opacity-40 mt-16 ">
     <h1 class="text-5xl md:text-8xl font-bold mb-4 animate-slideInUp text-shadow">Hawler Medical University</h1>
     <p class="text-xl md:text-2xl text-center max-w-4xl animate-slideInUp delay-200">We provide you with our best scientific experience and professionals for our
       academics and students to achieve an optimal learning outcome.</p>

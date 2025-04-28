@@ -421,7 +421,8 @@
   </script>
 </head>
 
-<body class="bg-gray-100" style="font-family: Cambria, Georgia, serif">
+<body class="bg-gray-100" style="font-family: Cambria, Georgia, serif; max-width: 100%;
+  overflow-x: hidden;">
   <!-- Scroll Progress Bar -->
   <div class="progress-container">
     <div class="progress-bar" id="progressBar"></div>
@@ -485,7 +486,7 @@
             <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
             <div class="dropdown-content">
               <a href="{{ route('colleges.medicine') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Medicine</a>
-              <a href="{{ route('colleges.dentistry') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Dentistry</a>
+              <!-- <a href="{{ route('colleges.dentistry') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Dentistry</a> -->
               <a href="{{ route('colleges.pharmacy') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Pharmacy</a>
               <a href="{{ route('colleges.nursing') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Nursing</a>
             </div>

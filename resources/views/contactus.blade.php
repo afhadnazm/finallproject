@@ -475,7 +475,8 @@
   </script>
 </head>
 
-<body class="bg-gray-100" style="font-family: Cambria, Georgia, serif">
+<body class="bg-gray-100" style="font-family: Cambria, Georgia, serif; max-width: 100%;
+  overflow-x: hidden;">
   <!-- Scroll Progress Bar -->
   <div class="progress-container">
     <div class="progress-bar" id="progressBar"></div>
@@ -621,21 +622,10 @@
   </nav>
 
   <!-- Hero Section with Contact Us Header -->
-  <div class="hero-section bg-gradient-to-r from-orange-100 to-orange-50 pt-24">
-    <div class="container mx-auto px-4 py-16">
-      <div class="text-center">
-        <h1 class="text-5xl font-bold mb-4 gradient-text animate-fadeIn">Contact Us</h1>
-        <p class="text-orange-500 mt-2 animate-fadeIn delay-300">
-          <span class="hover-scale inline-block">Home</span> 
-          <span class="inline-block mx-2">></span> 
-          <span class="hover-scale inline-block">Contact us</span>
-        </p>
-      </div>
-    </div>
-  </div>
+ 
 
   <!-- Main Content -->
-  <section class="bg-gray-50 py-10">
+  <section class="bg-gray-50 py-52">
     <div class="container mx-auto">
       <!-- Main Content -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 px-4">

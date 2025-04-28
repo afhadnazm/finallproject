@@ -9,7 +9,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
-<body class="bg-white text-gray-900 scroll-smooth " style="font-family: Cambria, Georgia, serif" >
+<body class="bg-white text-gray-900 scroll-smooth " style="font-family: Cambria, Georgia, serif ; max-width: 100%;
+  overflow-x: hidden;" >
 
 <!-- Navbar -->
 <nav class="bg-white shadow-md fixed top-0 left-0 w-full z-10 ">

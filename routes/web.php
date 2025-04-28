@@ -44,8 +44,17 @@ Route::get('/relevantwebs', function () {
 Route::get('/acadimicrelations', function () {
     return view('acadimicrelations');
 });
+Route::get('/it', function () {
+    return view('it');
+});
+Route::get('/e-management', function () {
+    return view('e-management');
+});
 Route::get('/acadimicprofile', function () {
     return view('acadimicprofile');
+});
+Route::get('/documents', function () {
+    return view('documents');
 });
 Route::get('/contactus', function () {
     return view('contactus');

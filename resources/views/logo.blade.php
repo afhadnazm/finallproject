@@ -421,17 +421,15 @@
     </script>
 </head>
 
-<body class="bg-gray-100" style="font-family: Cambria, Georgia, serif">
+<body class="" style="font-family: Cambria, Georgia, serif; max-width: 100%;
+  overflow-x: hidden;">
     <!-- Scroll Progress Bar -->
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
     
     <!-- Decorative Elements -->
-    <div class="circle-decoration bg-orange-200 w-64 h-64 top-40 -left-20 animate-float" style="animation-delay: 0s;"></div>
-    <div class="circle-decoration bg-orange-100 w-96 h-96 top-96 -right-40 animate-float" style="animation-delay: 2s;"></div>
-    <div class="circle-decoration bg-orange-50 w-48 h-48 bottom-40 left-1/4 animate-float" style="animation-delay: 1s;"></div>
-
+  
     <!-- Simplified Navbar -->
     <nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-10 animate-fadeIn glass-effect">
         <div class="container mx-auto px-4">
@@ -570,21 +568,37 @@
     </nav>
 
     <!-- Header Section -->
-    <section class="bg-gradient-to-r from-orange-200 via-orange-100 to-orange-200 py-12 shadow animate-fadeIn relative overflow-hidden mt-16">
-        <div class="container mx-auto text-center relative z-10">
-            <h1 class="text-5xl font-extrabold text-gray-800 tracking-tight">University Logo</h1>
-            <p class="text-orange-600 mt-4 text-lg">Home / Divisions / University Logo</p>
-        </div>
-        <!-- Animated background elements -->
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-            <div class="absolute w-20 h-20 bg-orange-300 rounded-full opacity-20 top-1/4 left-1/4 animate-bounce-slow"></div>
-            <div class="absolute w-16 h-16 bg-orange-400 rounded-full opacity-20 top-3/4 left-1/3 animate-bounce-slow" style="animation-delay: 1s;"></div>
-            <div class="absolute w-24 h-24 bg-orange-200 rounded-full opacity-20 top-1/3 right-1/4 animate-bounce-slow" style="animation-delay: 2s;"></div>
-        </div>
-    </section>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 pt-28 bg-white">
+        <div class="bg-white py-10 px-6 shadow-lg rounded-lg" data-aos="fade-up">
+            <!-- Title -->
+            <h1 class="text-4xl font-bold text-center text-gray-900 gradient-text">University Logo</h1>
+
+            <!-- Separator Line -->
+            <div class="w-full max-w-4xl mx-auto border-t border-gray-200 mt-4 mb-2"></div>
+
+            <!-- Metadata -->
+            <div class="flex justify-center items-center space-x-4 text-gray-600 text-sm mb-4">
+                <div class="flex items-center space-x-1 animate-fadeIn delay-100">
+                    <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M5 3a2 2 0 00-2 2v14l4-4h11a2 2 0 002-2V5a2 2 0 00-2-2H5z"/>
+                    </svg>
+                    <span>PRESIDENCY</span>
+                </div>
+                <div class="flex items-center space-x-1 animate-fadeIn delay-200">
+                    <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 16H5V9h14v11z"/>
+                    </svg>
+                    <span>18 OCTOBER 2020</span>
+                </div>
+               
+            </div>
+
+            <!-- Section Title -->
+         
+        </div> </div>
 
     <!-- Main Content Section -->
-    <section class="py-16 bg-white">
+    <section class="py-12 bg-white">
         <div class="container mx-auto px-4">
             <div class="max-w-6xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">

@@ -441,16 +441,14 @@
         }
     </script>
 </head>
-<body class="bg-white text-gray-900" style="font-family: Cambria, Georgia, serif">
+<body class="bg-white text-gray-900" style="font-family: Cambria, Georgia, serif; max-width: 100%;
+  overflow-x: hidden;">
     <!-- Scroll Progress Bar -->
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
 
-      <!-- Decorative Elements -->
-      <div class="circle-decoration bg-orange-200 w-64 h-64 top-40 -left-20 animate-float" style="animation-delay: 0s;"></div>
-      <div class="circle-decoration bg-orange-100 w-96 h-96 top-96 -right-40 animate-float" style="animation-delay: 2s;"></div>
-      <div class="circle-decoration bg-orange-50 w-48 h-48 bottom-40 left-1/4 animate-float" style="animation-delay: 1s;"></div>
+     
 
       <!-- Navbar -->
       <nav class="bg-white shadow-md fixed top-0 left-0 w-full z-10 animate-fadeIn glass-effect">
@@ -587,22 +585,8 @@
     </nav>
 
     <!-- Hero Section with Page Title -->
-    <div class="bg-gradient-to-r from-orange-50 to-orange-100 pt-24">
-        <div class="container mx-auto px-4 py-16">
-            <div class="text-center" data-aos="fade-down">
-                <h1 class="text-5xl font-bold mb-4 gradient-text animate-fadeIn">University Council</h1>
-                <p class="text-orange-500 mt-2 animate-fadeIn delay-300">
-                    <span class="hover-scale inline-block">Home</span> 
-                    <span class="inline-block mx-2">></span> 
-                    <span class="hover-scale inline-block">Divisions</span>
-                    <span class="inline-block mx-2">></span> 
-                    <span class="hover-scale inline-block">University Council</span>
-                </p>
-            </div>
-        </div>
-    </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-52">
         <div class="bg-white py-10 px-6 shadow-lg rounded-lg" data-aos="fade-up">
             <!-- Title -->
             <h1 class="text-4xl font-bold text-center text-gray-900 gradient-text">University Council</h1>
@@ -624,13 +608,7 @@
                     </svg>
                     <span>18 OCTOBER 2020</span>
                 </div>
-                <div class="flex items-center space-x-1 animate-fadeIn delay-300">
-                    <svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 4a8 8 0 100 16 8 8 0   fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 4a8 8 0 100 16 8 8 0 000-16zm1 9H8v-2h5v5h-2v-3z"/>
-                    </svg>
-                    <span>HITS: 13908</span>
-                </div>
+               
             </div>
 
             <!-- Section Title -->

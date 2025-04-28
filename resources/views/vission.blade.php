@@ -426,7 +426,8 @@
     </script>
 </head>
 
-<body class="bg-gray-100" style="font-family: Cambria, Georgia, serif">
+<body class="bg-gray-100" style="font-family: Cambria, Georgia, serif; max-width: 100%;
+  overflow-x: hidden;">
 <!-- Scroll Progress Bar -->
 <div class="progress-container">
     <div class="progress-bar" id="progressBar"></div>
@@ -566,21 +567,10 @@
 </nav>
 
 <!-- Header Section -->
-<section class="bg-gradient-to-r from-orange-200 via-orange-100 to-orange-200 py-12 shadow animate-fadeIn relative overflow-hidden mt-16">
-    <div class="container mx-auto text-center relative z-10">
-        <h1 class="text-5xl font-extrabold text-gray-800 tracking-tight">Vision and Mission</h1>
-        <p class="text-orange-600 mt-4 text-lg">Home / Divisions / Vision and Mission</p>
-    </div>
-    <!-- Animated background elements -->
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div class="absolute w-20 h-20 bg-orange-300 rounded-full opacity-20 top-1/4 left-1/4 animate-bounce-slow"></div>
-        <div class="absolute w-16 h-16 bg-orange-400 rounded-full opacity-20 top-3/4 left-1/3 animate-bounce-slow" style="animation-delay: 1s;"></div>
-        <div class="absolute w-24 h-24 bg-orange-200 rounded-full opacity-20 top-1/3 right-1/4 animate-bounce-slow" style="animation-delay: 2s;"></div>
-    </div>
-</section>
+
 
 <!-- Hero Section -->
-<section class="relative py-16 bg-white">
+<section class="relative pt-52 py-20 bg-white">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto text-center">
             <div class="overflow-hidden mb-6">
