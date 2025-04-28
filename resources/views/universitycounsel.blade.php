@@ -451,138 +451,147 @@
      
 
       <!-- Navbar -->
-      <nav class="bg-white shadow-md fixed top-0 left-0 w-full z-10 animate-fadeIn glass-effect">
-          <div class="container mx-auto px-4">
-              <div class="flex justify-between items-center">
-                  <!-- Logo -->
-                  <div class="size-40 font-bold text-orange-600 py-6 hover-scale">
-                      <img src="{{ asset('storage/images/logo.jpg') }}" alt="Logo" class="animate-pulse">
-                  </div>
+      <nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-10 animate-fadeIn glass-effect p-6">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <img src="{{ asset('storage/images/logo.jpg') }}" alt="Logo" class="h-24 w-24 rounded-md">
+                <span class="ml-2 text-lg font-semibold text-orange-600">Hawler Medical University</span>
+            </div>
 
-                  <!-- Menu Items (Hidden on mobile) -->
-                  <div class="hidden md:flex space-x-6 text-xl font-bold relative mx-auto">
-                      <!-- Home Dropdown -->
-                      <div class="relative dropdown group">
-                          <a href="/" class="nav-item text-gray-600 hover:text-orange-600 flex items-center">
-                              HOME
-                              <svg class="w-5 h-5 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                              </svg>
-                          </a>
-                          <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
-                          <div class="dropdown-content">
-                              <a href="{{ url('/aboutus') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">About us</a>
-                              <a href="{{ url('/contactus') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Contact us</a>
-                          </div>
-                      </div>
-                      
-                      <!-- Other Links -->
-                      <div class="relative dropdown group">
-                          <a href="#" class="nav-item text-gray-600 hover:text-orange-600 flex items-center">
-                              DIVISONS
-                              <svg class="w-5 h-5 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                              </svg>
-                          </a>
-                          <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
-                          <div class="dropdown-content">
-                              <a href="{{ url('/universitycounsel') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">University Counsil</a>
-                              <a href="{{ url('/presidentoffice') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">President's Office</a>
-                              <a href="{{ url('/vission') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Vision and Mission</a>
-                              <a href="{{ url('/logo') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">University Logo</a>
-                          </div>
-                      </div>
-                      
-                      <div class="relative dropdown group">
-                          <a href="#" class="nav-item text-gray-600 hover:text-orange-600 flex items-center">
-                              COLLEGE
-                              <svg class="w-5 h-5 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                              </svg>
-                          </a>
-                          <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
-                          <div class="dropdown-content">
-                              <a href="{{ route('colleges.medicine') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Medicine</a>
-                              <a href="{{ route('colleges.dentistry') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Dentistry</a>
-                              <a href="{{ route('colleges.pharmacy') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Pharmacy</a>
-                              <a href="{{ route('colleges.nursing') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">College of Nursing</a>
-                          </div>
-                      </div>
-
-                      <div class="relative dropdown group">
-                          <a href="#" class="nav-item text-gray-600 hover:text-orange-600 flex items-center">
-                              FEATURE
-                              <svg class="w-5 h-5 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                              </svg>
-                          </a>
-                          <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
-                          <div class="dropdown-content">
-                              <a href="{{ url('/library') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Library</a>
-                              <a href="{{ url('/confrance') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Confrances</a>
-                              <a href="{{ url('/relevantwebs') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Relevant Websites</a>
-                              <a href="{{ url('/acadimicrelations') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Academic Relations</a>
-                              <a href="{{ url('/acadimicprofile') }}" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Academicians Profile</a>
-                          </div>
-                      </div>
-
-                      <div class="relative dropdown group">
-                          <a href="" class="nav-item text-gray-600 hover:text-orange-600 flex items-center">
-                              SERVICE
-                              <svg class="w-5 h-5 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                              </svg>
-                          </a>
-                          <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
-                          <div class="dropdown-content">
-                              <a href="#" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">IT Services</a>
-                              <a href="#" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Documents</a>
-                              <a href="#" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">E-Managment</a>
-                          </div>
-                      </div>
-                      
-                      <div>
-                          <a href="#" class="nav-item text-gray-600 hover:text-orange-600 hover-expand">EVENTS</a>
-                      </div>
-                      
-                      <div class="relative dropdown group">
-                          <a href="#" class="nav-item text-gray-600 hover:text-orange-600 flex items-center">
-                              PORTAL
-                              <svg class="w-5 h-5 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                              </svg>
-                          </a>
-                          <div class="absolute left-0 right-0 h-6 bg-transparent"></div>
-                          <div class="dropdown-content">
-                              <a href="/student_login" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Student Portal</a>
-                              <a href="/teacher_login" class="block py-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 px-4 whitespace-nowrap">Teacher Portal</a>
-                          </div>
-                      </div>
-                  </div>
-
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="nav-toggle" class="text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 animate-pulse">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            <!-- Menu Items (Hidden on mobile) -->
+            <div class="hidden md:flex space-x-1">
+                <!-- Home Dropdown -->
+                <div class="relative dropdown">
+                    <a href="/" class="nav-item text-gray-700 flex items-center">
+                        HOME
+                        <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
-                    </button>
+                    </a>
+                    <div class="dropdown-content">
+                        <div class="py-2 px-4">
+                            <a href="{{ url('/aboutus') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">About us</a>
+                            <a href="{{ url('/contactus') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Contact us</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Links -->
+                <div class="relative dropdown">
+                    <a href="#" class="nav-item text-gray-700 flex items-center">
+                        DIVISIONS
+                        <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <div class="py-2 px-4">
+                            <a href="{{ url('/universitycounsel') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">University Counsil</a>
+                            <a href="{{ url('/presidentoffice') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">President's Office</a>
+                            <a href="{{ url('/vission') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Vision and Mission</a>
+                            <a href="{{ url('/logo') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">University Logo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative dropdown">
+                    <a href="#" class="nav-item text-gray-700 flex items-center">
+                        COLLEGE
+                        <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <div class="py-2 px-4">
+                            <a href="{{ route('colleges.medicine') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Medicine</a>
+                        
+                            <a href="{{ route('colleges.pharmacy') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Pharmacy</a>
+                            <a href="{{ route('colleges.nursing') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">College of Nursing</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative dropdown">
+                    <a href="#" class="nav-item text-gray-700 flex items-center">
+                        FEATURE
+                        <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <div class="py-2 px-4">
+                            <a href="{{ url('/library') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Library</a>
+                         
+                            <a href="{{ url('/relevantwebs') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Relevant Websites</a>
+                            <a href="{{ url('/acadimicrelations') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Academic Relations</a>
+                            <a href="{{ url('/acadimicprofile') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Academicians Profile</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative dropdown">
+                    <a href="#" class="nav-item text-gray-700 flex items-center">
+                        SERVICE
+                        <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <div class="py-2 px-4">
+                            <a href="{{ url('/it') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">IT Services</a>
+                            <a href="{{ url('/documents') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Documents</a>
+                            <a href="{{ url('/e-management') }}" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">E-Management</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="{{ url('/events') }}" class="nav-item text-gray-700">EVENTS</a>
+
+                <div class="relative dropdown">
+                    <a href="#" class="nav-item text-gray-700 flex items-center">
+                        PORTAL
+                        <svg class="w-4 h-4 ml-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <div class="py-2 px-4">
+                            <a href="/student_login" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Student Portal</a>
+                            <a href="/teacher_login" class="block py-1.5 text-sm text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded px-2">Teacher Portal</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Mobile Menu (Initially Hidden) -->
-            <div id="nav-content" class="hidden md:hidden animate-slideInUp">
-                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-orange-50 hover:text-orange-600">HOME</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-orange-50 hover:text-orange-600">DIVISIONS</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-orange-50 hover:text-orange-600">COLLEGE</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-orange-50 hover:text-orange-600">FEATURE</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-orange-50 hover:text-orange-600">SERVICE</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-orange-50 hover:text-orange-600">EVENTS</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:bg-orange-50 hover:text-orange-600">PORTAL</a>
+            <!-- Hamburger Button (Mobile) -->
+            <div class="md:hidden flex items-center">
+                <button id="menu-btn" class="text-orange-500 focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
             </div>
         </div>
-    </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg px-4 py-4 space-y-2">
+            <a href="/" class="block text-gray-700 py-2">Home</a>
+            <a href="{{ url('/aboutus') }}" class="block text-gray-700 py-2">About Us</a>
+            <a href="{{ url('/contactus') }}" class="block text-gray-700 py-2">Contact Us</a>
+            <a href="{{ url('/events') }}" class="block text-gray-700 py-2">Events</a>
+
+            <p class="font-bold text-orange-500 mt-4">Divisions</p>
+            <a href="{{ url('/universitycounsel') }}" class="block text-gray-600 py-1 pl-4">University Council</a>
+            <a href="{{ url('/presidentoffice') }}" class="block text-gray-600 py-1 pl-4">President's Office</a>
+            <a href="{{ url('/vission') }}" class="block text-gray-600 py-1 pl-4">Vision and Mission</a>
+            <a href="{{ url('/logo') }}" class="block text-gray-600 py-1 pl-4">University Logo</a>
+        </div>
+    </div>
+</nav>
+
+
 
     <!-- Hero Section with Page Title -->
 
@@ -806,5 +815,14 @@
             document.getElementById("progressBar").style.width = scrolled + "%";
         };
     </script>
+    <script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+</script>
+
 </body>
 </html>

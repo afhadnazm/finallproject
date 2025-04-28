@@ -53,6 +53,9 @@ Route::get('/e-management', function () {
 Route::get('/acadimicprofile', function () {
     return view('acadimicprofile');
 });
+Route::get('/events', function () {
+    return view('events');
+});
 Route::get('/documents', function () {
     return view('documents');
 });
