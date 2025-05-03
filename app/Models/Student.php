@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Semester;
+
 class Student extends Authenticatable
 {
     // Define the table name (optional if Laravel's naming convention is followed)
@@ -44,6 +45,15 @@ class Student extends Authenticatable
     public function grades()
     {
         return $this->hasMany(Grade::class);
+    }
+    public function stage()
+    {
+        return $this->belongsTo(Stage::class);
+    }
+
+    public function semester()
+    {
+        return $this->belongsTo(Semester::class);
     }
 
 

@@ -42,14 +42,10 @@
                         </a>
                         <a href="#" id="subjects-menu"
                             class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
-                            <i class="fas fa-cog mr-3"></i>
+                            <i class="fas fa-book-open mr-3"></i>
                             subject
                         </a>
-                        <a href="#"
-                            class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
-                            <i class="fas fa-chart-bar mr-3"></i>
-                            Reports
-                        </a>
+
                     </nav>
                 </div>
                 <div class="p-4 border-t border-gray-700">
@@ -102,7 +98,8 @@
                                 </div>
                                 <div class="ml-4">
                                     <p class="text-sm font-medium text-gray-500">Total Users</p>
-                                    <p class="text-2xl font-semibold text-gray-800">{{$totalStudents}}</p>
+                                    <p class="text-2xl font-semibold text-gray-800">{{$totalStudents + $totalTeachers}}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -128,118 +125,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-red-100 text-red-600">
-                                    <i class="fas fa-exclamation-triangle text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-500">Issues</p>
-                                    <p class="text-2xl font-semibold text-gray-800">5</p>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
 
-                    <!-- Recent Activity and Pending Approvals -->
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <!-- Recent Activity -->
-                        <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow">
-                            <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Activity</h2>
-                            <div class="space-y-4">
-                                <div class="flex items-start">
-                                    <div
-                                        class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                                        <i class="fas fa-user-plus"></i>
-                                    </div>
-                                    <div class="ml-4">
-                                        <p class="text-sm font-medium text-gray-800">New student registration</p>
-                                        <p class="text-sm text-gray-500">John Doe registered 2 hours ago</p>
-                                    </div>
-                                    <div class="ml-auto text-sm text-gray-500">2h ago</div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div
-                                        class="flex-shrink-0 h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="ml-4">
-                                        <p class="text-sm font-medium text-gray-800">Approved student</p>
-                                        <p class="text-sm text-gray-500">Jane Smith was approved</p>
-                                    </div>
-                                    <div class="ml-auto text-sm text-gray-500">5h ago</div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div
-                                        class="flex-shrink-0 h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">
-                                        <i class="fas fa-times"></i>
-                                    </div>
-                                    <div class="ml-4">
-                                        <p class="text-sm font-medium text-gray-800">Rejected application</p>
-                                        <p class="text-sm text-gray-500">Application #1234 was rejected</p>
-                                    </div>
-                                    <div class="ml-auto text-sm text-gray-500">1d ago</div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Pending Approvals -->
-                        <div class="bg-white p-6 rounded-lg shadow">
-                            <h2 class="text-lg font-semibold text-gray-800 mb-4">Pending Approvals</h2>
-                            <div class="space-y-4">
-                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                    <div>
-                                        <p class="font-medium text-gray-800">Michael Brown</p>
-                                        <p class="text-sm text-gray-500">Computer Science</p>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <button class="p-2 text-green-600 bg-green-100 rounded-full hover:bg-green-200">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                        <button class="p-2 text-red-600 bg-red-100 rounded-full hover:bg-red-200">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                    <div>
-                                        <p class="font-medium text-gray-800">Sarah Johnson</p>
-                                        <p class="text-sm text-gray-500">Business Administration</p>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <button class="p-2 text-green-600 bg-green-100 rounded-full hover:bg-green-200">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                        <button class="p-2 text-red-600 bg-red-100 rounded-full hover:bg-red-200">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                    <div>
-                                        <p class="font-medium text-gray-800">David Wilson</p>
-                                        <p class="text-sm text-gray-500">Electrical Engineering</p>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <button class="p-2 text-green-600 bg-green-100 rounded-full hover:bg-green-200">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                        <button class="p-2 text-red-600 bg-red-100 rounded-full hover:bg-red-200">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="mt-4 w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                                View All Pending
-                            </button>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Students View (hidden by default) -->
                 <div id="students-view">
+                    <div class="flex items-center ">
+                        <button id="mobile-menu-button" class="md:hidden text-gray-500 focus:outline-none">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <h1 class="text-3xl font-bold mb-6">Pending Approvals</h1>
+                    </div>
                     @foreach ($pendingStudents as $student)
+
                         <div
                             class="px-6 py-4 border-b flex flex-col md:flex-row justify-between items-start md:items-center">
                             <div class="flex items-center space-x-4">
@@ -689,23 +590,24 @@
                                                 </template>
                                                 <template x-if="editing">
                                                     <div class="flex space-x-2">
-                                                        <button @click="
-                                                                                    axios.put(`/admin/subjects/${subject.id}`, {
-                                                                                        name: subject.name,
-                                                                                        stage_id: subject.stage_id,
-                                                                                        semester_id: subject.semester_id,
-                                                                                        teacher_id: subject.teacher_id
-                                                                                    })
-                                                                                    .then(response => {
-                                                                                        editing = false;
-                                                                                        original = JSON.parse(JSON.stringify(subject));
-                                                                                        alert('Changes saved successfully!');
-                                                                                    })
-                                                                                    .catch(error => {
-                                                                                        console.error('Error:', error.response.data);
-                                                                                        alert('Error: ' + (error.response.data.message || 'Failed to save'));
-                                                                                    });
-                                                                                "
+                                                        <button
+                                                            @click="
+                                                                                                                                                                axios.put(`/admin/subjects/${subject.id}`, {
+                                                                                                                                                                    name: subject.name,
+                                                                                                                                                                    stage_id: subject.stage_id,
+                                                                                                                                                                    semester_id: subject.semester_id,
+                                                                                                                                                                    teacher_id: subject.teacher_id
+                                                                                                                                                                })
+                                                                                                                                                                .then(response => {
+                                                                                                                                                                    editing = false;
+                                                                                                                                                                    original = JSON.parse(JSON.stringify(subject));
+                                                                                                                                                                    alert('Changes saved successfully!');
+                                                                                                                                                                })
+                                                                                                                                                                .catch(error => {
+                                                                                                                                                                    console.error('Error:', error.response.data);
+                                                                                                                                                                    alert('Error: ' + (error.response.data.message || 'Failed to save'));
+                                                                                                                                                                });
+                                                                                                                                                            "
                                                             class="text-green-600 hover:text-green-900">Save</button>
 
                                                         <button @click="editing = false; subject = original"
@@ -812,15 +714,15 @@
                                 </div>
                                 <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
                                     <nav class="flex-1 space-y-2">
-                                        <a href="#"
+                                        <a href="#" id="mobile-dashboard-menu"
                                             class="flex items-center px-4 py-2 text-gray-100 bg-gray-700 rounded-lg">
                                             <i class="fas fa-tachometer-alt mr-3"></i>
                                             Dashboard
                                         </a>
-                                        <a href="#"
+                                        <a href="#" id="mobile-teachers-menu"
                                             class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
                                             <i class="fas fa-users mr-3"></i>
-                                            Users
+                                            Teachers
                                         </a>
                                         <a href="#" id="mobile-students-menu"
                                             class="flex items-center justify-between px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
@@ -831,15 +733,10 @@
                                             <span
                                                 class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full">23</span>
                                         </a>
-                                        <a href="#"
+                                        <a href="#" id="mobile-subjects-menu"
                                             class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
-                                            <i class="fas fa-cog mr-3"></i>
-                                            Settings
-                                        </a>
-                                        <a href="#"
-                                            class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-gray-100 rounded-lg">
-                                            <i class="fas fa-chart-bar mr-3"></i>
-                                            Reports
+                                            <i class="fas fa-book-open mr-3"></i>
+                                            Subjects
                                         </a>
                                     </nav>
                                 </div>
@@ -901,6 +798,10 @@
                         const mobileSidebar = document.getElementById('mobile-sidebar');
                         const backdrop = document.getElementById('mobile-sidebar-backdrop');
                         const mobileTeachersMenu = document.getElementById('mobile-teachers-menu');
+                        const mobileStudentsMenu = document.getElementById('mobile-students-menu');
+                        const mobileSubjectsMenu = document.getElementById('mobile-subjects-menu');
+                        const mobileDashboardMenu = document.getElementById('mobile-dashboard-menu');
+
 
                         mobileMenuButton.addEventListener('click', function () {
                             mobileSidebar.classList.remove('hidden');
@@ -918,10 +819,30 @@
                         document.querySelectorAll('#mobile-sidebar a').forEach(item => {
                             item.addEventListener('click', closeMenu);
                         });
+                        mobileTeachersMenu.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            showTeachersView();
+                            closeMenu();
+                        });
+                        mobileStudentsMenu.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            showStudentsView();
+                            closeMenu();
+                        });
+                        mobileSubjectsMenu.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            showsubject();
+                            closeMenu();
+                        });
+                        mobileDashboardMenu.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            showDashboardView();
+                            closeMenu();
+                        });
+
 
                         // View switching functionality
                         const studentsMenu = document.getElementById('students-menu');
-                        const mobileStudentsMenu = document.getElementById('mobile-students-menu');
                         const dashboardMenu = document.getElementById('dashboard-menu');
                         const dashboardView = document.getElementById('dashboard-view');
                         const studentsView = document.getElementById('students-view');
@@ -1041,12 +962,8 @@
                             showsubject();
                         });
 
-                        // Missing event listener for mobileTeachersMenu
-                        mobileTeachersMenu.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            showTeachersView();
-                            closeMenu();
-                        });
+
+
                     });
 
                     document.querySelector('form').addEventListener('submit', function (e) {

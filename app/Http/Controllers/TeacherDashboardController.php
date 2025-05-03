@@ -15,13 +15,39 @@ class TeacherDashboardController extends Controller
     }
     public function dashboard()
     {
-        $teacher = auth()->guard('teacher')->user();
+        $teacher = Auth::guard('teacher')->user();
 
+        // Get all subjects taught by this teacher with their students
         $subjects = Subject::with(['students', 'stage', 'semester'])
             ->where('teacher_id', $teacher->id)
+            ->orderBy('name')
             ->get();
 
-        return view('teacher.index', compact('subjects'));
+        // Calculate dashboard statistics
+        $totalStudents = 0;
+        $gradesSubmitted = 0;
+        $gradesPending = 0;
+
+        foreach ($subjects as $subject) {
+            $totalStudents += $subject->students->count();
+
+            foreach ($subject->students as $student) {
+                $grade = $student->grades()->where('subject_id', $subject->id)->first();
+                if ($grade && $grade->total !== null) {
+                    $gradesSubmitted++;
+                } else {
+                    $gradesPending++;
+                }
+            }
+        }
+
+        return view('teacher.index', compact(
+            'subjects',
+            'totalStudents',
+            'gradesSubmitted',
+            'gradesPending',
+            'teacher'
+        ));
     }
 
     public function login(Request $request)
@@ -45,24 +71,30 @@ class TeacherDashboardController extends Controller
         return redirect()->route('login.from.teacher');
     }
 
-    public function updateGrades(Request $request)
+    public function updateGrade(Request $request)
     {
-        $gradesData = $request->grades;
+        $request->validate([
+            'student_id' => 'required|integer',
+            'subject_id' => 'required|integer',
+            'midterm' => 'nullable|numeric|min:0|max:30',
+            'final' => 'nullable|numeric|min:0|max:40',
+            'practical' => 'nullable|numeric|min:0|max:30',
+        ]);
 
-        foreach ($gradesData as $id => $data) {
-            $grade = Grade::find($id);
+        $grade = Grade::firstOrNew([
+            'student_id' => $request->student_id,
+            'subject_id' => $request->subject_id,
+        ]);
 
-            $grade->midterm = $data['midterm'];
-            $grade->final = $data['final'];
-            $grade->practical = $data['practical'];
-            $grade->total = ($data['midterm'] ?? 0) + ($data['final'] ?? 0) + ($data['practical'] ?? 0);
-            $grade->comments = $data['comments'] ?? null;
+        $grade->midterm = $request->midterm ?? 0;
+        $grade->final = $request->final ?? 0;
+        $grade->practical = $request->practical ?? 0;
+        $grade->total = $grade->midterm + $grade->final + $grade->practical;
 
-            $grade->save();
-        }
+        $grade->save();
 
-        return back()->with('success', 'Grades updated successfully!');
+        return response()->json(['success' => true]);
+
+
     }
-
-
 }

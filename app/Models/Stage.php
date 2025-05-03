@@ -33,6 +33,12 @@ class stage extends Authenticatable
     {
         return $this->hasMany(Subject::class);
     }
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
+
+
 
 }
 

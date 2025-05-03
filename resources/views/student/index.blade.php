@@ -16,7 +16,7 @@
         <div class="bg-white rounded-xl shadow-md p-6 mb-8">
             <h1 class="text-3xl font-bold text-gray-800 mb-2">Welcome, {{ $student->first_name }}</h1>
             <p class="text-gray-600">
-                Stage {{ $student->stage->name }}, Semester {{ $student->semester->name }}
+                {{ $student->stage->name }},  {{ $student->semester->name }}
             </p>
         </div>
 
@@ -87,7 +87,7 @@
                                     </div>
                                     <span
                                         class="text-sm px-2 py-1 rounded-full 
-                                                        {{ $subject->pivot->status === 'approved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                                     {{ $subject->pivot->status === 'approved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
                                         {{ ucfirst($subject->pivot->status) }}
                                     </span>
                                 </div>
@@ -107,7 +107,7 @@
         <div class="bg-white rounded-xl shadow-md p-6 mt-8">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold text-gray-800">Your Grades</h2>
-                <span class="text-sm text-gray-500">Semester {{ $student->semester->name }}</span>
+                <span class="text-sm text-gray-500"> {{ $student->semester?->name ?? 'N\a' }}</span>
             </div>
 
             @if($grades->count() > 0)
@@ -138,8 +138,9 @@
                                                 <i class="fas fa-book text-purple-600"></i>
                                             </div>
                                             <div>
-                                                <div class="text-sm font-medium text-gray-900">{{ $grade->subject->name }}</div>
-                                                <div class="text-sm text-gray-500">
+                                                <div class="text-sm font-medium text-gray-900">
+                                                    {{ $grade->subject->name ?? 'no grade' }}</div>
+                                                  <div class="text-sm text-gray-500">
                                                     {{ $grade->subject->teacher->first_name ?? 'No teacher' }}
                                                 </div>
                                             </div>
