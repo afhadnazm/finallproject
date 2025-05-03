@@ -23,6 +23,7 @@ class AdminDashboardController extends Controller
         $teachers = Teacher::all();
         $pendingStudents = pending_student::where('status', 'pending')->get();
         $totalStudents = Student::count();
+        $totalTeachers = Teacher::count();
         $totalpensdinStudents = pending_student::count();
         $stages = Stage::all();
         $semesters = Semester::all();
@@ -36,7 +37,8 @@ class AdminDashboardController extends Controller
             'teachers',
             'stages',
             'semesters',
-            'subjects'
+            'subjects',
+            'totalTeachers'
         ));
 
 

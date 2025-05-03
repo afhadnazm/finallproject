@@ -18,7 +18,7 @@ class StudentDashboardController extends Controller
     // app/Http/Controllers/StudentController.php
     public function dashboard()
     {
-        $student = Auth::guard('student')->user();
+        $student = Auth::guard('student')->user()->load(['stage', 'semester']);
 
         // Get available subjects for the student's stage and semester
         $availableSubjects = Subject::where('stage_id', $student->stage_id)
@@ -31,7 +31,6 @@ class StudentDashboardController extends Controller
 
         // Get registered subjects
         $registeredSubjects = $student->subjects()
-            ->wherePivot('status', 'approved')
             ->with('teacher')
             ->get();
 
@@ -50,20 +49,42 @@ class StudentDashboardController extends Controller
 
     public function subject_register(Request $request)
     {
-        $request->validate([
-            'subject_id' => 'required|exists:subjects,id',
+        $student = auth()->guard('student')->user();
+
+        $validated = $request->validate([
+            'subject_id' => 'required|exists:subjects,id'
         ]);
 
-        $student = auth()->user(); // Authenticated student
-        $subjectId = $request->subject_id;
-
         // Check if already registered
-        if (!$student->subjects()->where('subject_id', $subjectId)->exists()) {
-            $student->subjects()->attach($subjectId);
-            return back()->with('success', 'Registered successfully!');
+        if ($student->subjects()->where('subject_id', $validated['subject_id'])->exists()) {
+            return back()->with('error', 'You are already registered for this subject');
         }
 
-        return back()->with('info', 'You have already registered for this subject.');
+        // Get the subject with semester information
+        $subject = Subject::findOrFail($validated['subject_id']);
+
+        // Create the registration record in subject_student table
+        $student->subjects()->attach($validated['subject_id'], [
+            'status' => 'pending',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        // Create a record in grades_students table with NULL values
+        Grade::create([
+            'student_id' => $student->id,
+            'subject_id' => $validated['subject_id'],
+            'semester_id' => $subject->semester_id,
+            'midterm' => null,
+            'final' => null,
+            'practical' => null,
+            'total' => null,
+            'comments' => null,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        return back()->with('success', 'Subject registration submitted successfully');
     }
 
     public function login(Request $request)
@@ -94,6 +115,7 @@ class StudentDashboardController extends Controller
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:students,email|unique:pending_students,email',
             'password' => 'required|min:8',
+            'Department' => 'nullable|string|max:255',
             'student_id' => 'required|file|mimes:jpeg,png,pdf|max:5120',
             'enrollment_proof' => 'required|file|mimes:jpeg,png,pdf|max:5120',
             'verification_notes' => 'nullable|string',
@@ -111,8 +133,7 @@ class StudentDashboardController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'stage_id' => $request->stage_id, // Make sure to add this to your form
-            'department' => $request->department,
+            'department' => $request->Department,
             'student_id_path' => $studentIdPath,
             'enrollment_proof_path' => $enrollmentProofPath,
             'verification_notes' => $request->verification_notes,

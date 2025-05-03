@@ -120,9 +120,9 @@ Route::prefix('student')->group(function () {
 Route::prefix('teacher')->group(function () {
     Route::get('/dashboard', [TeacherDashboardController::class, 'dashboard'])->name('teacher.dashboard')->middleware("teacher");
     Route::post('/login/owner', [TeacherDashboardController::class, 'login'])->name('login.teacher');
-    Route::post('/logout', [TeacherDashboardController::class, 'logout'])->name('logout.teacher')->middleware('teacher');
+    Route::get('/logout', [TeacherDashboardController::class, 'logout'])->name('logout.teacher')->middleware('teacher');
     Route::get('/login', [TeacherDashboardController::class, 'index'])->name('login.from.teacher');
-    Route::put('/teacher/update-grade/{student_id}', [TeacherDashboardController::class, 'updateGrade'])->name('teacher.update.grade');
+    Route::post('/grades/update', [TeacherDashboardController::class, 'updateGrade'])->name('teacher.update.grade');
 
 
 
