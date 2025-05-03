@@ -291,7 +291,7 @@
             <h1 class="text-5xl md:text-6xl font-bold text-white opacity-0 animate-fade-in">College of Medicine</h1>
            
             <div class="mt-8 opacity-0 animate-fade-in delay-300">
-                <a href="#contact" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full transition-colors duration-300 hover:scale-105 transform">Apply Now</a>
+                <!-- <a href="#contact" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full transition-colors duration-300 hover:scale-105 transform">Apply Now</a> -->
                 <a href="#programs" class="ml-4 bg-transparent hover:bg-orange-500 text-white font-semibold py-3 px-6 border border-gray-200 rounded-full transition-all duration-300 hover:scale-105 transform">Explore Programs</a>
             </div>
         </div>
